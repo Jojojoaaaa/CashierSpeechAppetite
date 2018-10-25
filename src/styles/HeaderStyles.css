@@ -1,0 +1,8 @@
+.header-container {
+    background-color: yellow;
+    position: relative;
+    height: 7vh;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
