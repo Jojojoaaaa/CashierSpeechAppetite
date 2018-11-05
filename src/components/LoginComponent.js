@@ -13,6 +13,10 @@ export default function LoginComponent(props) {
                 onChange={(e) => handlePasswordInput(e.target.value)}/>
             <br/>
             <button onClick={() => handleLogin(password)}>Login</button>
+
+
+
+            
        <br/><br/><br/><br/> <br/><br/> <br/><br/>
         To be fixed. Header and Nav shouldn't be here -_- I know how to do it,
         but I don't have time so charaaan

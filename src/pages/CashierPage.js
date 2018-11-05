@@ -9,11 +9,11 @@ class CashierPage extends Component{
     super(props);
    }
 
-   componentWillMount() {
-        if (!this.props.auth) {
-            this.props.history.push(route.LOGIN);
-        }
-   }
+//    componentWillMount() {
+//         if (!this.props.auth) {
+//             this.props.history.push(route.LOGIN);
+//         }
+//    }
    render() {
        return (
         <CashierContainer/>

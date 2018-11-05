@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import LoginContainer from '../containers/LoginContainer';
 
-import * as routes from '../constants/routes';
 import * as actions from '../store/actions';
 
 class LoginPage extends Component{
@@ -24,4 +23,9 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(LoginPage);
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: () => dispatch(actions.authorize())
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

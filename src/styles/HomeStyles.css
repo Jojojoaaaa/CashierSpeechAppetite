@@ -1,0 +1,10 @@
+.box-1 {
+    display: flex;
+    flex-flow: row wrap;
+}
+.box-2 {
+    width: 95%;
+}
+.page-container {
+    background-color: limegreen;
+}
