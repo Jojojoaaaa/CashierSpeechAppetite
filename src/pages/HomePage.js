@@ -22,9 +22,9 @@ class HomePage extends Component{
     }
     render() {
        return (
-        <div className='box-1'> 
+        <div className='screen-box'> 
             <NavbarContainer/>
-            <div className='box-2'>
+            <div className='right-box'>
                 <HeaderComponent/>
                 <div className='page-container'>
                     <Route exact path ={route.CASHIER} component={CashierPage}/>

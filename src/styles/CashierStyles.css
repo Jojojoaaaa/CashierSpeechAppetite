@@ -2,3 +2,22 @@
     background-color: burlywood;
     height: 93vh;
 }
+.order-card {
+    background-color: darkcyan;
+    height: 15%; 
+    border-style: solid;
+    border-color: red;
+    display: flex;
+    flex-direction: row;
+}
+.orders {
+    background-color: darkgreen;
+    height: 100%;
+    width: 20%;
+    margin: 0px 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+}
+.order-table-num {
+    width: 30%;
+}
