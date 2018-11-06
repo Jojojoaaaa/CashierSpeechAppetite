@@ -1,7 +1,31 @@
 .cashier-container {
     background-color: burlywood;
-    height: 93vh;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
 }
+/* main group */
+.orders {
+    background-color: darkgreen;
+    width: 25%;
+    margin: 20px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+.order {
+    background-color: goldenrod;
+    margin: 20px 10px 0 20px;
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+
+}
+.receipt {
+    background-color: gainsboro;
+    margin: 20px 10px 0 10px;
+    width: 30%;
+}
+/* items within main group */
 .order-card {
     background-color: darkcyan;
     height: 15%; 
@@ -10,14 +34,37 @@
     display: flex;
     flex-direction: row;
 }
-.orders {
-    background-color: darkgreen;
-    height: 100%;
-    width: 20%;
-    margin: 0px 30px 0 30px;
-    display: flex;
-    flex-direction: column;
-}
 .order-table-num {
     width: 30%;
+}
+.item-card {
+    display: flex;
+    flex-direction: row;
+    background-color: khaki;
+    /* border-style: solid;
+    border-color: red; */
+    margin: 10px 10px 0 10px;
+    height: 15%;
+}
+.menu-image-container {
+    width: 20%;
+    background-color: aqua;
+}
+#menu-image {
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+    margin: auto;
+}
+.item-details {
+    width: 35%;
+    background-color: rebeccapurple;
+}
+.item-qty {
+    width: 20%;
+    background-color: magenta;
+}
+.item-subtotal {
+    width: 25%;
+    background-color: rosybrown;
 }
