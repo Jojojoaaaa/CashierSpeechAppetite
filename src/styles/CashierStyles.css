@@ -20,7 +20,7 @@
     flex-direction: column;
 
 }
-.receipt {
+.invoice {
     background-color: gainsboro;
     margin: 20px 10px 0 10px;
     width: 30%;
@@ -67,4 +67,10 @@
 .item-subtotal {
     width: 25%;
     background-color: rosybrown;
+}
+.receipt-section {
+    display: none;
+}
+.receipt-content {
+    background-color: royalblue;
 }

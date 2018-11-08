@@ -10,7 +10,7 @@ export default function OrdersComponent(props) {
             <div 
                 className='order-card' 
                 key={order.id}
-                onClick={() => handleOrderClick(order.id)}>
+                onClick={() => handleOrderClick(order.id, order.table_number)}>
                 <div className='order-table-num'>
                         {order.table_number}
                 </div>

@@ -9,6 +9,7 @@ import '../styles/CashierStyles.css';
 
 import OrdersComponent from '../components/OrdersComponent';
 import OrderComponent from '../components/OrderComponent';
+import InvoiceContainer from './InvoiceContainer';
 
 class CashierContainer extends Component{
     constructor(props) {
@@ -23,27 +24,32 @@ class CashierContainer extends Component{
             this.retrieveAllOrders();          
         }
     }
-   
+    componentWillUnmount() {
+        clearTimeout(this.update);
+    }
     retrieveAllOrders = () => {
        const post_data = {status: status.SERVED};
 
        axios.post(url.RETRIEVE_ORDERS, post_data)
         .then(response => {
-            let orders = response.data;
+            const orders = response.data;
             this.setState({orders: orders})
         })
         .catch(error => {
             alert(error.message);
         })
-        //every two seconds
+        this.update = setTimeout(this.retrieveAllOrders, 2000);
     }
-    handleOrderClick = (order_id) => {
+    clearSelectedOrder = () => {
+        this.setState({selected_order: {}});
+    }
+    handleOrderClick = (order_id, table_number) => {
         const post_data = {order_id: order_id};
         axios.post(url.RETIEVE_ORDER_INVOICE, post_data)
             .then(response => {
                 if (response.data.order_items.length > 0) {
-                    this.setState({selected_order: response.data})
-                    //console.log(response.data);
+                    const selected_order = {...response.data, table_number: table_number}
+                    this.setState({selected_order: selected_order})
                 }
             })
             .catch(error => {
@@ -57,7 +63,7 @@ class CashierContainer extends Component{
            selected_order 
             } = this.state;
        const handleOrderClick = this.handleOrderClick;
-       
+       const clearSelectedOrder = this.clearSelectedOrder;
        return (
         <div className='cashier-container'>
             <div className='orders'>
@@ -65,13 +71,11 @@ class CashierContainer extends Component{
                     orders={orders}
                     handleOrderClick={handleOrderClick}/>
             </div>
-            <div className="order">
-                <OrderComponent
-                    order_items= {selected_order.order_items}/>
-            </div>
-            <div className='receipt'> 
-                receipt
-            </div>
+            <OrderComponent
+                order_items= {selected_order.order_items}/>
+           <InvoiceContainer
+                selected_order={selected_order}
+                clearSelectedOrder={clearSelectedOrder}/>
         </div>
        )
    }

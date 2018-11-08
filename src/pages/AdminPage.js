@@ -8,12 +8,7 @@ class AdminPage extends Component{
     constructor(props) {
         super(props);
     }
-
-    // componentWillMount() {
-    //     if (!this.props.auth) {
-    //         this.props.history.push(route.LOGIN);
-    //     }
-    // }  
+  
    render() {
        return (
         <AdminContainer/>
