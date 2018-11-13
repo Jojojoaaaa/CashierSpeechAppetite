@@ -1,6 +1,9 @@
 import React, {Component}from 'react';
+import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import AdminContainer from '../containers/AdminContainer';
+
+import '../styles/AdminStyles.css';
 
 import * as route from '../constants/routes';
 
@@ -11,7 +14,9 @@ class AdminPage extends Component{
   
    render() {
        return (
-        <AdminContainer/>
+        <div>
+          <Route exact path ={route.ADMIN} component={AdminContainer}/>
+        </div>
        )
    }
 }

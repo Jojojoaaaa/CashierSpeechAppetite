@@ -9,7 +9,7 @@ import '../styles/CashierStyles.css';
 
 import OrdersComponent from '../components/OrdersComponent';
 import OrderComponent from '../components/OrderComponent';
-import InvoiceContainer from './InvoiceContainer';
+import InvoiceComponent from '../components/InvoiceComponent';
 
 class CashierContainer extends Component{
     constructor(props) {
@@ -17,6 +17,7 @@ class CashierContainer extends Component{
         this.state = {
             orders: [],
             selected_order: {},
+            printed: false
         }
     }
     componentWillMount() {
@@ -50,20 +51,49 @@ class CashierContainer extends Component{
                 if (response.data.order_items.length > 0) {
                     const selected_order = {...response.data, table_number: table_number}
                     this.setState({selected_order: selected_order})
+                    this.setPrintedFalse();
                 }
             })
             .catch(error => {
                 alert(error.message);
             })
     }
-    
+    setPrinted = () => {
+        this.setState({printed: true});
+    }
+    setPrintedFalse = () => {
+        this.setState({printed: false});
+    }
+    handleCheckOut = () => {
+        const post_data = {
+            order_id: this.state.selected_order.id,
+            status_update: status.PAID
+        }
+        axios.post(url.UPDATE_ORDERS_STATUS, post_data)
+            .then(response => {
+                if (response.data > 0) {
+                    alert('Order has been updated.');
+                    this.setPrintedFalse();
+                    this.clearSelectedOrder();
+                }
+                  else {
+                    alert('Something went wrong...');
+                }
+            })
+            .catch(error => {
+                alert(error.message);
+              });
+    }
    render() {
        const {
            orders,
-           selected_order 
+           selected_order,
+           printed, 
             } = this.state;
+
        const handleOrderClick = this.handleOrderClick;
-       const clearSelectedOrder = this.clearSelectedOrder;
+       const setPrinted = this.setPrinted;
+       const handleCheckOut = this.handleCheckOut;
        return (
         <div className='cashier-container'>
             <div className='orders'>
@@ -73,9 +103,11 @@ class CashierContainer extends Component{
             </div>
             <OrderComponent
                 order_items= {selected_order.order_items}/>
-           <InvoiceContainer
-                selected_order={selected_order}
-                clearSelectedOrder={clearSelectedOrder}/>
+           <InvoiceComponent
+                    selected_order={selected_order}
+                    printed={printed}
+                    setPrinted={setPrinted}
+                    handleCheckOut={handleCheckOut}/>
         </div>
        )
    }
