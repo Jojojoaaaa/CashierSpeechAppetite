@@ -1,0 +1,44 @@
+.menu-container {
+    background-color: brown;
+    height: 93vh;
+    display: flex;
+    flex-direction: row;
+}
+.menu-content {
+    height: 100%;
+    width: 100%;
+    background-color: lavenderblush;
+}
+.menu-filter {
+    width: 30%;
+    height: 100%;
+    background-color: fuchsia;
+}
+.menu-header {
+    background-color: yellowgreen;
+    height: 15%;
+}
+.menu-cards {
+    background-color: darkslategrey;
+    width: 100%;
+    height: 80%;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+.menu-card {
+    background-color: sienna;
+    height: 80%;
+    width: 20%;
+    margin: 2%;
+}
+#menu-profile-image {
+    height: 60%;
+    width: 100%;
+}
+#category-image {
+    height: 10%;
+    width: 18%;
+}

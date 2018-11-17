@@ -10,9 +10,9 @@ export default function AdminComponent(props) {
         <div  className='admin-container'>
             <div className='admin-design'>Welcome Admin</div>
             <div className='admin-nav'>
-                <div className='create-account-box'>
-                    Create Waiter Account <br/>
-                    <button onClick={() => handleRedirect(route.CREATE_WAITER_ACCOUNT)}>Create</button>
+                <div className='manage-account-box'>
+                    Manage Waiter Account <br/>
+                    <button onClick={() => handleRedirect(route.MANAGE_ACCOUNT)}>Create</button>
                 </div>
                 <div className='menu-box'>
                     Menu <br/>

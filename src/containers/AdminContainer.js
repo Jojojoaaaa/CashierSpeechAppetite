@@ -1,5 +1,4 @@
 import React, {Component}from 'react';
-import {withRouter} from 'react-router-dom';
 import AdminComponent from '../components/AdminComponent';
 import '../styles/AdminStyles.css';
 
@@ -11,15 +10,13 @@ class AdminContainer extends Component{
     this.props.history.push(route_path);
    }
    render() {
+       console.log(this.props);
        const handleRedirect = this.handleRedirect;
-       return (
-           <div className='admin-container'>
-                <AdminComponent
-                    handleRedirect={handleRedirect}/>
-           </div>
-           
+       return (     
+            <AdminComponent
+                handleRedirect={handleRedirect}/>     
        )
    }
 }
 
-export default withRouter(AdminContainer);
+export default AdminContainer;

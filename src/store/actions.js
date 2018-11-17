@@ -5,3 +5,8 @@ export const authorize = () => {
         type: actionTypes.AUTHORIZE
     };
 };
+export const unAuthorize = () => {
+    return {
+        type: actionTypes.UNAUTHORIZE
+    };
+};

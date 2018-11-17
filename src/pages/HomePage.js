@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import '../styles/HomeStyles.css';
 import * as route from '../constants/routes';
-
+import * as actions from '../store/actions';
 import NavbarContainer from '../containers/NavbarContainer';
 import HeaderComponent from '../components/HeaderComponent';
 import CashierPage from './CashierPage';
@@ -20,15 +20,22 @@ class HomePage extends Component{
             this.props.history.push(route.LOGIN);
         }
     }
+    handleLogout = () => {
+        this.props.onLogout();
+        this.props.history.push(route.LOGIN);
+    }
     render() {
+        const handleLogout = this.handleLogout;
+
        return (
         <div className='screen-box'> 
             <NavbarContainer/>
             <div className='right-box'>
-                <HeaderComponent/>
+                <HeaderComponent
+                    handleLogout = {handleLogout}/>
                 <div className='page-container'>
                     <Route exact path ={route.CASHIER} component={CashierPage}/>
-                    <Route exact path ={route.ADMIN} component={AdminPage}/>
+                    <Route path ={route.ADMIN} component={AdminPage}/>
                 </div>
             </div>
         </div>
@@ -41,4 +48,10 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps)(HomePage);
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogout: () => dispatch(actions.unAuthorize())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

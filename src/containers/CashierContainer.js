@@ -46,7 +46,7 @@ class CashierContainer extends Component{
     }
     handleOrderClick = (order_id, table_number) => {
         const post_data = {order_id: order_id};
-        axios.post(url.RETIEVE_ORDER_INVOICE, post_data)
+        axios.post(url.RETRIEVE_ORDER_INVOICE, post_data)
             .then(response => {
                 if (response.data.order_items.length > 0) {
                     const selected_order = {...response.data, table_number: table_number}
