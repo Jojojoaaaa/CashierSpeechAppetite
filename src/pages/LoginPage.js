@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import LoginContainer from '../containers/LoginContainer';
 
+import '../styles/LoginStyles.css';
 import * as actions from '../store/actions';
 
 class LoginPage extends Component{

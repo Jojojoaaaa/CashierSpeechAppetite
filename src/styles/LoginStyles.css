@@ -1,4 +1,52 @@
-.login-container {
-    background-color: blanchedalmond;
-    height: 93vh;
+body{
+    margin:0;
+    background-image: url(../assets/login/login-bg.svg);
+    background-size: cover;
+}
+.login-container{
+    align-items: center;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    
+    
+}
+.login-box{ 
+    flex-direction: column;
+    flex: 1;
+}
+
+.logo{
+    margin-bottom: 30px;
+}
+
+.lbl-admin{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+.txt-password{
+    padding: 8px;
+    width: 15%;
+    background-color:rgb(255, 255, 255, 0.3);
+    border: 0;
+    border-radius: 5px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.btn-login{
+color: white;
+background-color: #C05B5A;
+border: 0;
+border-radius: 50px;
+padding: 10px;
+width: 8%;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-login:hover{
+    background-color: rgb(180, 77, 75);
 }

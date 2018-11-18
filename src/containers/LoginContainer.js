@@ -2,7 +2,7 @@ import React, {Component}from 'react';
 
 import axios from '../axios';
 
-import '../styles/LoginStyles.css';
+
 import LoginComponent from '../components/LoginComponent';
 
 import * as url from '../constants/urls';
