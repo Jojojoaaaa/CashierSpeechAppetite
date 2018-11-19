@@ -13,6 +13,8 @@ import HeaderComponent from '../components/HeaderComponent';
 import CashierPage from './CashierPage';
 import AdminPage from './AdminPage';
 
+import bg from '../assets/home-bg.svg';
+
 class HomePage extends Component{
     constructor(props) {
         super(props);
