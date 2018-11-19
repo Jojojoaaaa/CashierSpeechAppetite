@@ -13,7 +13,10 @@ class MenuContainer extends Component{
    constructor(props) {
     super(props);
     this.state = {
-        menu: []
+        menu: [],
+        categories: [],
+        filter_display: {display: "none"},
+        filter_button_display: {display: ''}
     }
    }
 
@@ -21,41 +24,61 @@ class MenuContainer extends Component{
        this.retrieveAllMenu();
    }
    retrieveAllMenu = () => {
-       axios.get(url.RETRIEVE_ALL_MENU)
+       axios.get(url.RETRIEVE_ALL_MENU_AND_CATEGORY)
         .then(response => {
-            this.setState({menu: response.data});
-            console.log(response.data);
+            this.setState({
+                menu: response.data.menu,
+                categories: response.data.category});
         })
         .catch(error => {
             alert(error.message);
         })
-      
    }
-   render() {
-       const {menu} = this.state;
+   handleOpenFilter = () => {
+       this.setState({
+            filter_display: {display: ''},
+            filter_button_display: {display: 'none'}
+        });
+   }
+    render() {
+        const {
+                menu,
+                categories,
+                filter_display,
+                filter_button_display} = this.state;
 
-       const menu_cards = (
-            menu 
-            ?
-            menu.map(m => <MenuCardContainer key={m.id} id={m.id}/>)
-            : 
-            null
-        );
-       return (
-        <div className='menu-container'>
-            <div className='menu-content'>
-                <div className='menu-header'>
-                    <MenuHeaderContianer/>                
+        const handleOpenFilter = this.handleOpenFilter;
+
+        const menu_cards = (
+                menu 
+                ?
+                menu.map(m => (
+                    <MenuCardContainer 
+                    key={m.id} 
+                    id={m.id}
+                    categories={categories}/>
+                    )
+                )
+                : 
+                null
+            );
+        return (
+            <div className='menu-container'>
+                <div className='menu-content'>
+                    <div className='menu-header'>
+                        <MenuHeaderContianer
+                            handleOpenFilter={handleOpenFilter}
+                            filter_button_display={filter_button_display}/>                
+                    </div>
+                    <div className='menu-cards'>
+                    {menu_cards}
+                    </div>
                 </div>
-                <div className='menu-cards'>
-                   {menu_cards}
-                </div>
+                <div className='menu-filter' style={filter_display}>filter</div>
             </div>
-            <div className='menu-filter' style={{display: 'none'}}>filter</div>
-        </div>
 
-       )
-   }
+        )
+    }
 }
 
 export default withRouter(MenuContainer);
