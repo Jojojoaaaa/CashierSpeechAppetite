@@ -3,6 +3,9 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import '../styles/HomeStyles.css';
+import '../styles/HeaderStyles.css';
+import '../styles/NavbarStyles.css';
+
 import * as route from '../constants/routes';
 import * as actions from '../store/actions';
 import NavbarContainer from '../containers/NavbarContainer';

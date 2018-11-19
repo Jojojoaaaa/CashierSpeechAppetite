@@ -1,8 +1,36 @@
 .header-container {
-    background-color: yellow;
+    background-color: white;
     position: relative;
-    height: 7vh;
     display: flex;
-    flex-flow: row wrap;
+    height: 9vh;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px 0px 30px;
+    box-shadow:0 5px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.header-admin{
+    display: flex;
+    flex:0.2;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#header-flex{
+    display:flex;
+    flex:1;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: #C0AC80;
+}
+
+.button:hover{
+    color: rgb(168, 139, 77);
+    scale: 5%;
+}
+
+#icon-admin{
+    padding-right: 15px;
 }
