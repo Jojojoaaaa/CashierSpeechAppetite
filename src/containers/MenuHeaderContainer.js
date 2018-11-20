@@ -7,8 +7,8 @@ class MenuHeaderContainer extends Component{
 
     render() {
         const {
-            handleOpenFilter,
-            filter_button_display
+            handleFilterClick,
+            filter_button_class
         }  = this.props; 
         return (
             <div>
@@ -19,8 +19,8 @@ class MenuHeaderContainer extends Component{
                 <button>FIND</button>
                 <button>Add New</button>
                 <button 
-                    style={filter_button_display}                
-                    onClick={() => handleOpenFilter()}>FILTERS</button>
+                    className={'class-mo-mae '+filter_button_class}                
+                    onClick={() => handleFilterClick()}>FILTERS</button>
             </div>
         )
     }

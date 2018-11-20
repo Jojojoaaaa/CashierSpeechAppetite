@@ -10,7 +10,6 @@ class AdminContainer extends Component{
     this.props.history.push(route_path);
    }
    render() {
-       console.log(this.props);
        const handleRedirect = this.handleRedirect;
        return (     
             <AdminComponent

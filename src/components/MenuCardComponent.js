@@ -3,7 +3,8 @@ import React from 'react';
 export default function MenuCardComponent(props) {
     const {
         edit_mode,
-        edit_button_display,
+        edit_button_class,
+        options_class,
         image_source,
         name,
         desc,
@@ -14,7 +15,6 @@ export default function MenuCardComponent(props) {
         handleEditMode,
         category_display,
         category_image_display,
-        options_display,
         handleNameChange,
         handleDescChange,
         handlePriceChange,
@@ -41,8 +41,8 @@ export default function MenuCardComponent(props) {
     return (
         <div className='menu-card'>
             <button 
-                onClick={()=>handleEditMode()}
-                style={edit_button_display}>EDIT</button>
+                className={'class-mo-mae '+edit_button_class}
+                onClick={()=>handleEditMode()}>EDIT</button>
             <img id='menu-profile-image' src={image_source}></img>
             <input
                 className='menu-input'
@@ -83,10 +83,10 @@ export default function MenuCardComponent(props) {
                 </div>
             </div>
             <button
-                style={options_display}
+                className={'class-mo-mae '+options_class}
                 onClick={()=>handleCancelClick()}>Cancel</button>
             <button
-                style={options_display}>Save</button>
+                className={'class-mo-mae '+options_class}>Save</button>
         </div>
     );
 }

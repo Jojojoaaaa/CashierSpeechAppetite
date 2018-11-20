@@ -29,7 +29,12 @@
 #btn-cashier:hover{
     background: #DA8C75;
 }
-
+.cashier-active {
+    background: #DA8C75;
+}
 #btn-admin:hover{
+    background: #EDC589;
+}
+.admin-active {
     background: #EDC589;
 }

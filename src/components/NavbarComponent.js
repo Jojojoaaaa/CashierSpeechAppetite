@@ -7,10 +7,27 @@ import admin from '../assets/navbar/btn-admin.svg';
 import * as route from '../constants/routes';
 
 export default function NavbarComponent(props) {
+    const {
+        cashier_class,
+        admin_class
+    } = props;
+    
     return (
         <div className="nav-container">
-                <div className="button-flex" id="btn-cashier" ><Link to={route.CASHIER}><img src={cashier} ></img></Link></div>
-                <div className="button-flex" id="btn-admin"><Link to={route.ADMIN}><img src={admin} ></img></Link></div> 
+                <div 
+                    className={"button-flex"+cashier_class}
+                    id="btn-cashier">
+                        <Link to={route.CASHIER}>
+                            <img src={cashier} ></img>
+                        </Link>
+                </div>
+                <div 
+                    className={"button-flex"+admin_class} 
+                    id="btn-admin">
+                        <Link to={route.ADMIN}>
+                            <img src={admin} ></img>
+                        </Link>
+                </div> 
         </div>
     );
 }

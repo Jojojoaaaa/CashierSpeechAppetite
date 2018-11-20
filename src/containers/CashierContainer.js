@@ -96,6 +96,7 @@ class CashierContainer extends Component{
         <div className='cashier-container'>
             <div className='orders'>
                 <OrdersComponent
+                    selected_order={selected_order}
                     orders={orders}
                     handleOrderClick={handleOrderClick}/>
             </div>
