@@ -17,11 +17,10 @@ class MenuCardContainer extends Component{
         servings: 0,
         price: 0,
         edit_mode: false,
+        category_edit_mode: false,
         category_name: '',
         category_display: {display: 'none'},
         category_image_display: {display: ''},
-        options_display: {display: 'none'},
-        edit_button_display: {display: ''}
     }
     this.id = this.props.id;
    }
@@ -48,19 +47,12 @@ class MenuCardContainer extends Component{
     handleEditMode = () => {
        this.setState({
            edit_mode: true,
-           options_display: {display: ''},
-           edit_button_display: {display: 'none'}
        });
     }
     handleCancelClick = () => {
         this.retrieveMenuProfile();
-        this.restoreDefaultMode();
-    }
-    restoreDefaultMode  = () => {
         this.setState({
             edit_mode: false,
-            options_display: {display: 'none'},
-            edit_button_display: {display: ''}
         });
     }
     handleCategoryClick = () => {
@@ -106,7 +98,6 @@ class MenuCardContainer extends Component{
     render() {
         const {
                 edit_mode,
-                edit_button_display,
                 image_source,
                 name,
                 desc,
@@ -115,7 +106,6 @@ class MenuCardContainer extends Component{
                 cat_image_source,
                 category_display,
                 category_image_display,
-                options_display
             } = this.state;
         const categories = this.props.categories;
         const handleEditMode = this.handleEditMode;   
@@ -126,10 +116,14 @@ class MenuCardContainer extends Component{
         const handleCategoryClick = this.handleCategoryClick;
         const handleCategorySelect = this.handleCategorySelect;
         const handleCancelClick = this.handleCancelClick;
+
+        const edit_button_class = (edit_mode) ? 'hide' : '';
+        const options_class = (edit_mode) ? '' : 'hide';
         return (
             <MenuCardComponent
                 edit_mode={edit_mode}
-                edit_button_display={edit_button_display}
+                edit_button_class={edit_button_class}
+                options_class={options_class}
                 image_source={image_source}
                 name={name}
                 desc={desc}
@@ -140,7 +134,6 @@ class MenuCardContainer extends Component{
                 handleEditMode={handleEditMode}
                 category_display={category_display}
                 category_image_display={category_image_display}
-                options_display={options_display}
                 handleNameChange={handleNameChange}
                 handleDescChange={handleDescChange}
                 handlePriceChange={handlePriceChange}

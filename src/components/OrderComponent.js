@@ -1,5 +1,5 @@
 import React from 'react';
-
+import * as type from '../constants/type'; 
 export default function OrderComponent(props) {
     const {order_items} = props;
 
@@ -8,7 +8,7 @@ export default function OrderComponent(props) {
             ?
                 <div className="order">
                     {(order_items.map(item => {
-                        const image = "data:image/png;base64, " + item.image;
+                        const image = type.IMAGE_PREFIX + item.image;
                         return (
                             <div className="item-card" key={item.menu}>
                                 <div className="menu-image-container">

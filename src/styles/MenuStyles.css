@@ -68,3 +68,6 @@
 .category-item:hover {
     background-color: blue;
 }
+.hide {
+    display: none;
+}

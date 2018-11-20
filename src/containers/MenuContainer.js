@@ -1,8 +1,10 @@
 import React, {Component}from 'react';
 import {withRouter} from 'react-router-dom';
 
-import MenuHeaderContianer from '../containers/MenuHeaderContainer';
+import MenuHeaderComponent from '../components/MenuHeaderComponent';
 import MenuCardContainer from '../containers/MenuCardContainer'
+import FilterComponent from '../components/FilterComponent';
+
 import '../styles/MenuStyles.css';
 
 import axios from '../axios';
@@ -15,8 +17,7 @@ class MenuContainer extends Component{
     this.state = {
         menu: [],
         categories: [],
-        filter_display: {display: "none"},
-        filter_button_display: {display: ''}
+        filter_visible: false,
     }
    }
 
@@ -34,21 +35,22 @@ class MenuContainer extends Component{
             alert(error.message);
         })
    }
-   handleOpenFilter = () => {
+   handleFilterClick = () => {
+       const {filter_visible} = this.state;
        this.setState({
-            filter_display: {display: ''},
-            filter_button_display: {display: 'none'}
+            filter_visible: !filter_visible
         });
    }
     render() {
         const {
                 menu,
                 categories,
-                filter_display,
-                filter_button_display} = this.state;
+                filter_visible
+            } = this.state;
 
-        const handleOpenFilter = this.handleOpenFilter;
-
+        const handleFilterClick = this.handleFilterClick;
+        const filter_class = (filter_visible) ? '' : 'hide';
+        const filter_button_class = (filter_visible) ? 'hide' : '';
         const menu_cards = (
                 menu 
                 ?
@@ -66,15 +68,18 @@ class MenuContainer extends Component{
             <div className='menu-container'>
                 <div className='menu-content'>
                     <div className='menu-header'>
-                        <MenuHeaderContianer
-                            handleOpenFilter={handleOpenFilter}
-                            filter_button_display={filter_button_display}/>                
+                        <MenuHeaderComponent
+                            handleFilterClick={handleFilterClick}
+                            filter_button_class={filter_button_class}/>                
                     </div>
                     <div className='menu-cards'>
                     {menu_cards}
                     </div>
                 </div>
-                <div className='menu-filter' style={filter_display}>filter</div>
+                <div className={'menu-filter '+filter_class}>
+                    <FilterComponent
+                        handleFilterClick={handleFilterClick}/>
+                </div>
             </div>
 
         )
