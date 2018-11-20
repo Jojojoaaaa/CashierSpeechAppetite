@@ -24,31 +24,35 @@
 
 }
 .invoice {
-    background-color: gainsboro;
-    margin: 20px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    background: rgb(255, 244, 228);
+    margin: 10px 10px 10px 0px;
     flex:1;
 }
 
 /* orderlist */
 .order-card {
-    background-image: url(../assets/cashier/entry-bg.svg);
+    background-image: linear-gradient(to bottom right, #FFC977, #DA8C75);
     background-size: cover;
     height: 18.5%; 
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
     border-radius: 5px;
+    padding-left: 20px;
 }
 .order-table-num {
     display: flex;
     flex-direction: column;
+    flex: 0.8;
     width: 30%;
     text-align: flex-start;
     font-size: 18px;
-    padding-left:30px;
+    align-items: flex-start;
     justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: rgb(255, 255, 255, 0.5)
+    color: rgb(255, 255, 255, 0.5);
 }
 
 #num-textbold{
@@ -58,9 +62,17 @@
 }
 
 .order-details{
+    flex: 1;
     padding-top: 20px;
     font-size: 16px;
     color: white;
+}
+
+.order-design{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* order entry */
@@ -116,6 +128,81 @@
 .receipt-section {
     display: none;
 }
+
+.receipt-table {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+    color: #8C7132;
+}
+
+
+#text-table{
+    font-weight: bolder;
+    color: #C05B5A;
+    font-size: 40px;
+    font-family: Tahoma, sans-serif;
+}
+
+
+#text-payment{
+    font-weight: bolder;
+    margin-bottom: 10px;
+    color: #575757;
+}
+
+#text-title{
+    color: #575757;
+}
+
+#text-amount{
+    color: #8C7132;
+    font-weight: bold;
+}
+
+.receipt-payment{
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.payment-flex{
+    flex: 0.2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(253, 239, 218);
+    margin: 5px 15px 5px 15px;
+    border-radius: 2px;
+    padding: 0px 15px 0px 15px;
+}
+.receipt-buttons{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 5%;
+}
+
+.button-receipt{
+    width: 150px;
+    padding: 10px;
+    margin: 5px;
+    border: 0;
+    border-radius: 35px;
+    background-image: linear-gradient(to bottom right, #FFC977, #DA8C75);
+    color: white;
+}
+
+.button-receipt:hover{
+    background-image: linear-gradient(to bottom right, #DA8C75, #DA8C75);
+}
+
 .receipt-content {
     background-color: royalblue;
 }

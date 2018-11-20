@@ -23,18 +23,40 @@ export default function InvoiceComponent(props) {
                 </div>
                 {/* do not remove */}
 
-                Table {selected_order.table_number} <br/>
-                Order {selected_order.id} <br/>
-                Payment Details <br/>
-                Total Php {selected_order.total} <br/>
-                <ReactToPrint
-                    trigger={() =>  <button>Print</button>}
-                    content={() => ref}
-                    onAfterPrint={() => setPrinted()}
-                />
-                <button 
-                    disabled={!printed} 
-                    onClick={() => handleCheckOut()}>Check Out</button>
+                <div className="receipt-table">
+                <text id="text-table">Table {selected_order.table_number}</text>
+                <text id="text-order">Order #{selected_order.id}</text>
+                </div>
+                
+                
+                <div className="receipt-payment">
+                    <div id="text-payment">Payment Details</div>
+                    <div className="payment-flex">
+                        <text id="text-title">Net Amount</text> 
+                        <text id="text-amount">Php {(selected_order.total-selected_order.total*0.12).toFixed(2)}</text>
+                    </div>
+                    <div className="payment-flex">
+                        <text id="text-title">VAT (12%)</text> 
+                        <text id="text-amount">Php {(selected_order.total*0.12).toFixed(2)}</text>
+                    </div>
+                    <div className="payment-flex">
+                        <text id="text-title">Total</text> 
+                        <text id="text-amount">Php {(selected_order.total).toFixed(2)}</text>
+                    </div>
+                </div>
+
+                <div className="receipt-buttons">
+                    <ReactToPrint
+                        trigger={() =>  <button className="button-receipt">Print</button>}
+                        content={() => ref}
+                        onAfterPrint={() => setPrinted()}
+                    />
+                    <button 
+                        className="button-receipt"
+                        disabled={!printed} 
+                        onClick={() => handleCheckOut()}>Check Out</button>
+                </div>
+                
             </div>)
         :
         null

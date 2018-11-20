@@ -1,6 +1,7 @@
 import React from 'react';
 
 import moment from 'moment';
+import design from '../assets/cashier/icon-design.svg';
 export default function OrdersComponent(props) {
     const {
         orders,
@@ -20,6 +21,9 @@ export default function OrdersComponent(props) {
                     <text>Order #{order.id}</text>
                     <br/>
                     {moment(order.date).format("LT")}
+                </div>
+                <div className="order-design">
+                    <img src={design} alt=""></img>
                 </div>
             </div>
         ))
