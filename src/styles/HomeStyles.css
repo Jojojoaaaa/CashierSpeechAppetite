@@ -6,6 +6,7 @@
     width: 95%;
 }
 .page-container {
-    background-color: limegreen;
-    height: 93vh;
+    background-image: url(../assets/home-bg.svg);
+    background-size: cover;
+    height: 91vh;
 }

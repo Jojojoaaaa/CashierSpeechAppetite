@@ -1,5 +1,6 @@
 import React from 'react';
 
+import moment from 'moment';
 export default function OrdersComponent(props) {
     const {
         orders,
@@ -12,12 +13,13 @@ export default function OrdersComponent(props) {
                 key={order.id}
                 onClick={() => handleOrderClick(order.id, order.table_number)}>
                 <div className='order-table-num'>
-                        {order.table_number}
+                <text>Table</text>
+                <text id="num-textbold">{order.table_number}</text>
                 </div>
-                <div>
-                    {order.id}
+                <div className="order-details">
+                    <text>Order #{order.id}</text>
                     <br/>
-                    {order.date}
+                    {moment(order.date).format("LT")}
                 </div>
             </div>
         ))

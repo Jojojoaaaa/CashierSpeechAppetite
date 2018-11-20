@@ -5,8 +5,6 @@ import axios from '../axios';
 import * as url from '../constants/urls'
 import * as status from '../constants/type';
 
-import '../styles/CashierStyles.css';
-
 import OrdersComponent from '../components/OrdersComponent';
 import OrderComponent from '../components/OrderComponent';
 import InvoiceComponent from '../components/InvoiceComponent';

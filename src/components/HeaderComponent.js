@@ -1,16 +1,25 @@
 import React from 'react';
-import '../styles/HeaderStyles.css';
+
+
+import admin from "../assets/header/icon-admin.svg"
+import logout from "../assets/header/btn-logout.svg"
+import logo from "../assets/header/h-logo.svg"
 
 export default function HeaderComponent(props) {
     const {handleLogout} = props;
     return (
        <div className="header-container">
-           <div>Logo</div>
-           <div>
-                Admin Icon 
-               <div onClick={() => handleLogout()}>(Logout)</div>
+            <div>
+                <img alt="" src={logo}></img>
             </div>
-        
+            <div className="header-admin">
+                <div id="header-flex"><img src={admin} alt="" id="icon-admin"></img>
+                    Admin 
+                    <br/> 
+                    11/20/18
+                </div>
+                <div id="header-flex"><img src={logout} alt="" className="button" onClick={() => handleLogout()}></img></div>
+            </div>    
        </div>
     );
 }

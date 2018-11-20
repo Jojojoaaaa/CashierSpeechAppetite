@@ -15,8 +15,8 @@ export default function OrderComponent(props) {
                                     <img id="menu-image" src={image}/>
                                 </div>
                                 <div className="item-details">
-                                    <div className="item-name">{item.menu}</div>
-                                    <div className="item-price">{item.price}</div>
+                                    <div id="item-name">{item.menu}</div>
+                                    <div id="item-price">Php {item.price}</div>
                                 </div>
                                 <div className="item-qty">{item.qty}</div>
                                 <div className="item-subtotal">Php {item.qty * item.price}</div>

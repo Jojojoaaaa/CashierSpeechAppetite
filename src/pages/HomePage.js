@@ -3,12 +3,17 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import '../styles/HomeStyles.css';
+import '../styles/HeaderStyles.css';
+import '../styles/NavbarStyles.css';
+
 import * as route from '../constants/routes';
 import * as actions from '../store/actions';
 import NavbarContainer from '../containers/NavbarContainer';
 import HeaderComponent from '../components/HeaderComponent';
 import CashierPage from './CashierPage';
 import AdminPage from './AdminPage';
+
+import bg from '../assets/home-bg.svg';
 
 class HomePage extends Component{
     constructor(props) {
