@@ -9,6 +9,7 @@ export default function InvoiceComponent(props) {
         handleCheckOut,
         printed,
     } = props;
+
     let ref = "";
     return (
         selected_order.order_items
@@ -16,43 +17,45 @@ export default function InvoiceComponent(props) {
             (<div className='invoice'>
                 {/* di kitanon ni pero do not remove */}
                 <div 
-                    className='receipt-section'>
+                    className='invoice-section'>
                     <div  ref ={(el) =>ref = el}>
-                        <ReceiptComponent/>
+                        <ReceiptComponent   
+                        selected_order={selected_order}/>
+
                     </div>
                 </div>
                 {/* do not remove */}
 
-                <div className="receipt-table">
-                <text id="text-table">Table {selected_order.table_number}</text>
-                <text id="text-order">Order #{selected_order.id}</text>
+                <div className="invoice-table">
+                <div id="text-table">Table {selected_order.table_number}</div>
+                <div id="text-order">Order #{selected_order.id}</div>
                 </div>
                 
                 
-                <div className="receipt-payment">
+                <div className="invoice-payment">
                     <div id="text-payment">Payment Details</div>
                     <div className="payment-flex">
-                        <text id="text-title">Net Amount</text> 
-                        <text id="text-amount">Php {(selected_order.total-selected_order.total*0.12).toFixed(2)}</text>
+                        <div id="text-title">Net Amount</div> 
+                        <div id="text-amount">Php {(selected_order.total-selected_order.total*0.12).toFixed(2)}</div>
                     </div>
                     <div className="payment-flex">
-                        <text id="text-title">VAT (12%)</text> 
-                        <text id="text-amount">Php {(selected_order.total*0.12).toFixed(2)}</text>
+                        <div id="text-title">VAT (12%)</div> 
+                        <div id="text-amount">Php {(selected_order.total*0.12).toFixed(2)}</div>
                     </div>
                     <div className="payment-flex">
-                        <text id="text-title">Total</text> 
-                        <text id="text-amount">Php {(selected_order.total).toFixed(2)}</text>
+                        <div id="text-title">Total</div> 
+                        <div id="text-amount">Php {(selected_order.total).toFixed(2)}</div>
                     </div>
                 </div>
 
-                <div className="receipt-buttons">
+                <div className="invoice-buttons">
                     <ReactToPrint
-                        trigger={() =>  <button className="button-receipt">Print</button>}
+                        trigger={() =>  <button className="button-invoice">Print</button>}
                         content={() => ref}
                         onAfterPrint={() => setPrinted()}
                     />
                     <button 
-                        className="button-receipt"
+                        className="button-invoice"
                         disabled={!printed} 
                         onClick={() => handleCheckOut()}>Check Out</button>
                 </div>

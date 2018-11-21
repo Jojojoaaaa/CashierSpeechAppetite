@@ -6,8 +6,8 @@
 }
 /* main group */
 .orders {
-    width: 25%;
-    margin: 0px 20px 0 20px;
+    width: 30%;
+    margin: 0 20px 0 0;
     padding: 10px 10px 5px 10px;
     flex-direction: column;
     overflow-y: scroll;
@@ -34,23 +34,24 @@
 /* orderlist */
 .order-card {
     background-image: linear-gradient(to bottom right, #FFC977, #DA8C75);
-    background-size: cover;
-    height: 18.5%; 
+    height: 18%;
+    width: 85%; 
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
+    margin: 10px;
     border-radius: 5px;
     padding-left: 20px;
 }
 .selected-order-card {
-    background-image: url(../assets/cashier/entry-bg.svg);
-    background-size: cover;
-    height: 18.5%; 
-    width: 20%;
+    background-image: linear-gradient(to bottom right, #FFC977, #DA8C75);
+    height: 18%; 
+    transform: scale(1.1);
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
+    padding: 0px 0px 0px 20px;
     border-radius: 5px;
+    margin: 10px;
 }
 .order-table-num {
     display: flex;
@@ -78,7 +79,7 @@
     color: white;
 }
 
-.order-design{
+.order-logo{
     display: flex;
     flex: 1;
     justify-content: flex-end;
@@ -135,11 +136,12 @@
     justify-content: center;
     flex:1;
 }
-.receipt-section {
+
+.invoice-section {
     display: none;
 }
 
-.receipt-table {
+.invoice-table {
     display: flex;
     flex-direction: column;
     flex:1;
@@ -172,7 +174,7 @@
     font-weight: bold;
 }
 
-.receipt-payment{
+.invoice-payment{
     display: flex;
     flex: 2;
     flex-direction: column;
@@ -190,7 +192,7 @@
     border-radius: 2px;
     padding: 0px 15px 0px 15px;
 }
-.receipt-buttons{
+.invoice-buttons{
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -199,7 +201,7 @@
     padding-bottom: 5%;
 }
 
-.button-receipt{
+.button-invoice{
     width: 150px;
     padding: 10px;
     margin: 5px;
@@ -209,10 +211,82 @@
     color: white;
 }
 
-.button-receipt:hover{
+.button-invoice:hover{
     background-image: linear-gradient(to bottom right, #DA8C75, #DA8C75);
 }
 
+.button-invoice:disabled{
+    background-image: linear-gradient(to bottom right, rgb(153, 122, 112), rgb(153, 122, 112));
+}
+
+.receipt-section {
+    display: none;
+}
+
+/* Receipt Component */
 .receipt-content {
-    background-color: royalblue;
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    font-size: 14px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.receipt-header{
+    flex: 1;
+    text-align: center;
+}
+
+.receipt-order-details{
+    flex:1;
+    padding-top: 10px;
+}
+
+.receipt-orders{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0 5px 0;
+}
+
+.receipt-heading{
+    display: flex;
+    flex: 0.5;
+    flex-direction: row;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.receipt-item-card{
+    display: flex;
+    flex: 1;
+    flex-direction:row;
+    position: relative;
+    padding: 10px;
+}
+
+.receipt-item{
+    flex:1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#receipt-item-name{
+    flex:2;
+}
+
+.receipt-total{
+    flex:1;
+    padding-top: 10px;
+}
+
+.total-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.receipt-footer{
+    flex: 1;
+    text-align: center;
+    padding-top: 50px;
 }

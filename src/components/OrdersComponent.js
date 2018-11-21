@@ -15,13 +15,16 @@ export default function OrdersComponent(props) {
                     key={order.id}
                     onClick={() => handleOrderClick(order.id, order.table_number)}>
                     <div className='order-table-num'>
-                    <text>Table</text>
-                    <text id="num-textbold">{order.table_number}</text>
+                    <div>Table</div>
+                    <div id="num-textbold">{order.table_number}</div>
                     </div>
                     <div className="order-details">
-                        <text>Order #{order.id}</text>
+                        <div>Order #{order.id}</div>
                         <br/>
                         {moment(order.date).format("LT")}
+                    </div>
+                    <div className="order-logo">
+                        <img src={design}></img>
                     </div>
                 </div>)
         })
