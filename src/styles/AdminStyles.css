@@ -1,34 +1,75 @@
 .admin-container {
-    background-color: peachpuff;
-    height: 93vh;
+    height: 91vh;
+    background-image: url(../assets/admin/admin-bg.svg);
+    background-size: cover;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-end;
 }
-.admin-design {
-    background-color: paleturquoise;
-}
+
 .admin-nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    background-color: darkgoldenrod;
-    height: 55%;
-    width: 100%;
+    justify-content: center;
+    flex:0.6;
+    margin: 0 175px 50px 175px;
 }
-.manage-account-box {
-    height: 100%;
-    width: 20%;
-    background-color: blueviolet;
-}
-.menu-box {
-    height: 100%;
-    width: 20%;
-    background-color: darkkhaki;
+.admin-choices{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 25px 0 25px;
+    align-items: center;
+    text-align: center;
+    padding: 45px 55px 45px 55px;
+    border-radius: 10px;
+    color: rgb(172, 105, 19);
+    border-width: 5px;
+    border: solid;
+    font-size: 14px;
+    box-shadow:0 5px 25px 0 rgba(0, 0, 0, 0.25);
 }
 
-.orders-box {
-    height: 100%;
-    width: 20%;
-    background-color: firebrick;
+
+
+#text-title{
+    text-align: center;
+    color:#66452D;
+    font-weight: bold;
+    font-size: 18px;
+    align-items: flex-end;
+}
+
+#btn-view{
+    background-image: linear-gradient(to bottom right, #FFC977, #DA8C75);
+    width: 125px;
+    padding: 8px;   
+    border-radius: 50px;
+    border: 0;
+    color: white;
+    align-items: flex-end;
+}
+
+#btn-view:hover{
+    background-image: linear-gradient(to bottom right, #DA8C75, #DA8C75);
+    transform: scale(1.1)
+
+}
+
+.choices-content{
+    flex:1;
+    display: flex;
+    align-items: center
+}
+
+.choices-icon{
+    flex:2;
+}
+
+.choices-button{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }

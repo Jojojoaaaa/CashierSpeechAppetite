@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as content from '../constants/receiptContent.js';
+import * as content from '../constants/content.js';
 
 import moment from 'moment';
 
