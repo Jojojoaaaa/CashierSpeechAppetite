@@ -19,8 +19,7 @@ class MenuCardContainer extends Component{
         edit_mode: false,
         category_edit_mode: false,
         category_name: '',
-        category_display: {display: 'none'},
-        category_image_display: {display: ''},
+        image_edit_mode: false
     }
     this.id = this.props.id;
    }
@@ -53,20 +52,18 @@ class MenuCardContainer extends Component{
         this.retrieveMenuProfile();
         this.setState({
             edit_mode: false,
+            category_edit_mode: false,
+            image_edit_mode:false
         });
     }
     handleCategoryClick = () => {
         const {
             edit_mode, 
-            category_display, 
-            category_image_display
         } = this.state;
         if (edit_mode) {
-            const display = (category_display.display === 'none') ? '' : 'none'; 
-            const image_display = (category_image_display.display === 'none') ? '' : 'none'; 
             this.setState({
-                category_display: {display: display},
-                category_image_display: {display: image_display}});
+                category_edit_mode: true,
+            });
         }
     }
     handleCategorySelect = (category) => {
@@ -76,12 +73,44 @@ class MenuCardContainer extends Component{
                 const new_image = response.data;
                 this.setState({
                     cat_image_source: type.IMAGE_PREFIX + new_image, 
-                    category_name: category 
+                    category_edit_mode: false,
+                    category_name: category, 
                 });
             })
             .catch(error => alert(error.message))    
+    }
+    handleSaveClick = () => {
+        const {
+            name,
+            desc,
+            price,
+            servings,
+            category_name
+        } = this.state
+        let {image_source} = this.state;
+        const image = image_source.split(',')[1];
 
-        this.handleCategoryClick();
+        const id = this.id;
+        const post_data = {
+            id: id,
+            image: image,
+            name: name,
+            desc: desc,
+            price: price,
+            servings: servings,
+            category_name: category_name
+        };
+ 
+        axios.post(url.UPDATE_MENU_PROFILE, post_data)
+            .then(response => {
+                alert(response.data);
+            })
+            .catch(error => {
+                alert(error.message);
+            })
+        this.setState({
+            edit_mode: false
+        }); 
     }
     handleNameChange = (name) => {
         this.setState({name: name});
@@ -95,6 +124,30 @@ class MenuCardContainer extends Component{
     handleServingsChange = (servings) => {
         this.setState({servings: servings});
     }
+    handlePictureChange = (picture) => {
+        this.getBase64(picture).then(base64 => {
+           this.setState({
+               image_source: base64,
+               image_edit_mode: false
+           });
+          });
+    }
+    handleImageClick = () => {
+        const {edit_mode} =this.state;
+        if (edit_mode) {
+            this.setState({
+                image_edit_mode: true,
+            });
+        }
+    }
+    getBase64 = (file) => {
+        return new Promise((resolve,reject) => {
+           const reader = new FileReader();
+           reader.onload = () => resolve(reader.result);
+           reader.onerror = error => reject(error);
+           reader.readAsDataURL(file);
+        });
+    }
     render() {
         const {
                 edit_mode,
@@ -104,8 +157,8 @@ class MenuCardContainer extends Component{
                 price,
                 servings,
                 cat_image_source,
-                category_display,
-                category_image_display,
+                category_edit_mode,
+                image_edit_mode
             } = this.state;
         const categories = this.props.categories;
         const handleEditMode = this.handleEditMode;   
@@ -113,17 +166,27 @@ class MenuCardContainer extends Component{
         const handleDescChange = this.handleDescChange;
         const handlePriceChange = this.handlePriceChange;
         const handleServingsChange = this.handleServingsChange;
+        const handlePictureChange = this.handlePictureChange;
         const handleCategoryClick = this.handleCategoryClick;
         const handleCategorySelect = this.handleCategorySelect;
         const handleCancelClick = this.handleCancelClick;
+        const handleImageClick = this.handleImageClick;
+        const handleSaveClick = this.handleSaveClick;
+
 
         const edit_button_class = (edit_mode) ? 'hide' : '';
         const options_class = (edit_mode) ? '' : 'hide';
+        const category_class = (category_edit_mode) ? 'hide' : '';
+        const category_options_class = (category_edit_mode) ? '' : 'hide';
+        const image_class = (image_edit_mode) ? 'hide' : '';
+        const image_picker_class = (image_edit_mode) ? '' : 'hide';
         return (
             <MenuCardComponent
                 edit_mode={edit_mode}
                 edit_button_class={edit_button_class}
                 options_class={options_class}
+                image_class={image_class}
+                image_picker_class={image_picker_class}
                 image_source={image_source}
                 name={name}
                 desc={desc}
@@ -132,15 +195,18 @@ class MenuCardContainer extends Component{
                 cat_image_source={cat_image_source}  
                 categories={categories}
                 handleEditMode={handleEditMode}
-                category_display={category_display}
-                category_image_display={category_image_display}
+                category_class={category_class}
+                category_options_class={category_options_class}
                 handleNameChange={handleNameChange}
                 handleDescChange={handleDescChange}
                 handlePriceChange={handlePriceChange}
                 handleServingsChange={handleServingsChange}
                 handleCategoryClick={handleCategoryClick}
                 handleCategorySelect={handleCategorySelect}
-                handleCancelClick={handleCancelClick}/>
+                handleCancelClick={handleCancelClick}
+                handlePictureChange={handlePictureChange}
+                handleImageClick={handleImageClick}
+                handleSaveClick={handleSaveClick}/>
         )
     }
 }

@@ -88,7 +88,7 @@ class CashierContainer extends Component{
            selected_order,
            printed, 
             } = this.state;
-
+        
        const handleOrderClick = this.handleOrderClick;
        const setPrinted = this.setPrinted;
        const handleCheckOut = this.handleCheckOut;

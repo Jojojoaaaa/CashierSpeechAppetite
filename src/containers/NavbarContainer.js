@@ -12,8 +12,8 @@ class NavbarContainer extends Component{
    render() {
        const selected_page = this.props.location.pathname; 
 
-       const cashier_class = (selected_page === route.CASHIER) ? " cashier-active" : '';
-       const admin_class = (selected_page === route.ADMIN) ? " admin-active" : ''; 
+       const cashier_class = (selected_page.includes(route.CASHIER)) ? " cashier-active" : '';
+       const admin_class = (selected_page.includes(route.ADMIN)) ? " admin-active" : ''; 
 
        return (
             <NavbarComponent
