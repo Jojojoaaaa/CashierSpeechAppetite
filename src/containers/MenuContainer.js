@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 
 import MenuHeaderComponent from '../components/MenuHeaderComponent';
 import MenuCardContainer from '../containers/MenuCardContainer'
+import AddNewMenuContainer from '../containers/AddNewMenuContainer';
 import FilterComponent from '../components/FilterComponent';
 
 import '../styles/MenuStyles.css';
@@ -16,10 +17,12 @@ class MenuContainer extends Component{
         super(props);
         this.state = {
             menu: [],
+            menu_grouped: {},
             menu_display: [],
             categories: [],
             category_filters: [],
             filter_visible: false,
+            add_menu: false,
         }
     }
 
@@ -32,11 +35,20 @@ class MenuContainer extends Component{
                 this.setState({
                     menu: response.data.menu,
                     menu_display: response.data.menu,
-                    categories: response.data.category});
+                    categories: response.data.category},
+                    () => this.groupMenu());
             })
             .catch(error => {
                 alert(error.message);
             })
+    }
+    groupMenu = () => {
+        const {categories, menu} = this.state;
+        let menu_grouped = {};
+        categories.forEach(category => {
+            menu_grouped[category] = menu.filter(m => m.category === category);
+        });
+        this.setState({menu_grouped: menu_grouped});
     }
     handleFilterClick = () => {
         const {filter_visible} = this.state;
@@ -62,7 +74,8 @@ class MenuContainer extends Component{
         menu.sort(this.sortName);
         this.setState({
             menu_display: menu_display,
-            menu: menu});
+            menu: menu},
+            () => this.groupMenu());
     }
     handleMenuSortPrice = () => {
         let menu_display = [...this.state.menu_display];
@@ -71,7 +84,8 @@ class MenuContainer extends Component{
         menu.sort(this.sortPrice);
         this.setState({
             menu_display: menu_display,
-            menu: menu});
+            menu: menu},
+            () => this.groupMenu());
     }
     handleMenuSortServings =() => {
         let menu_display = [...this.state.menu_display];
@@ -80,23 +94,42 @@ class MenuContainer extends Component{
         menu.sort(this.sortServings);
         this.setState({
             menu_display: menu_display,
-            menu: menu});
+            menu: menu},
+            () => this.groupMenu());
     }
     handleApplyFiltersClick = () => {
-        const {category_filters, menu} = this.state;
+        const {
+            category_filters, 
+            menu, 
+            menu_grouped} = this.state;
 
         if (category_filters[0]) {
             let filtered_menu = [];
             category_filters.forEach(category => {
                 //const fil_men =  menu_display.filter(menu => menu.category === category);
-                filtered_menu = [...filtered_menu, ...menu.filter(menu => menu.category === category)];
+                filtered_menu = [...filtered_menu, ...menu_grouped[category]];
             });
             this.setState({menu_display: filtered_menu})
         }
         else {
-            const {menu} = this.state;
             this.setState({menu_display: menu});
         }
+    }
+    handleSearchQueryChange = (search_query) => {
+        if (search_query === '') {
+            this.handleApplyFiltersClick();
+        }
+        else {
+            const {menu_display} = this.state;
+            const filtered_menu = menu_display.filter(menu => menu.name.includes(search_query));
+            this.setState({menu_display: filtered_menu});
+        }
+    };
+    handleAddMenuClick = () => {
+        this.setState({add_menu: true});
+    }
+    handleCancelAdd = () => {
+        this.setState({add_menu:false})
     }
     sortName = (a, b) => {
         if (a.name < b.name)
@@ -123,7 +156,8 @@ class MenuContainer extends Component{
         const {
                 menu_display,
                 categories,
-                filter_visible
+                filter_visible, 
+                add_menu
             } = this.state;
 
         const handleFilterClick = this.handleFilterClick;
@@ -132,9 +166,12 @@ class MenuContainer extends Component{
         const handleMenuSortPrice = this.handleMenuSortPrice;
         const handleMenuSortServings = this.handleMenuSortServings;
         const handleApplyFiltersClick = this.handleApplyFiltersClick;
+        const handleSearchQueryChange = this.handleSearchQueryChange;
+        const handleAddMenuClick = this.handleAddMenuClick;
+        const handleCancelAdd = this.handleCancelAdd;
 
         const filter_class = (filter_visible) ? '' : 'hide';
-        const filter_button_class = (filter_visible) ? 'hide' : 'btn-filter';
+        
         const menu_cards = (
                 menu_display 
                 ?
@@ -153,22 +190,35 @@ class MenuContainer extends Component{
                 <div className='menu-content'>
                     <div className='menu-header'>
                         <MenuHeaderComponent
+                            add_menu={add_menu}
+                            filter_visible={filter_visible}
                             handleFilterClick={handleFilterClick}
-                            filter_button_class={filter_button_class}/>                
+                            handleSearchQueryChange={handleSearchQueryChange}
+                            handleAddMenuClick={handleAddMenuClick}
+                            />                
                     </div>
                     <div className='menu-cards'>
+                    {add_menu
+                        ? 
+                        (<AddNewMenuContainer
+                            categories={categories}
+                            handleCancelAdd={handleCancelAdd}/>)
+                        :
+                        null
+                    }
                     {menu_cards}
                     </div>
                 </div>
-                <div className={'menu-filter '+filter_class}>
+                <div className={'menu-filter ' +filter_class}>
                     <FilterComponent
-                        handleFilterClick={handleFilterClick}
-                        categories={categories}
-                        handleCategoryClick={handleCategoryClick}
-                        handleMenuSortName={handleMenuSortName}
-                        handleMenuSortPrice={handleMenuSortPrice}
-                        handleMenuSortServings={handleMenuSortServings}
-                        handleApplyFiltersClick={handleApplyFiltersClick}/>
+                    handleFilterClick={handleFilterClick}
+                    categories={categories}
+                    handleCategoryClick={handleCategoryClick}
+                    handleMenuSortName={handleMenuSortName}
+                    handleMenuSortPrice={handleMenuSortPrice}
+                    handleMenuSortServings={handleMenuSortServings}
+                    handleApplyFiltersClick={handleApplyFiltersClick}
+                    />
                 </div>
             </div>
 
