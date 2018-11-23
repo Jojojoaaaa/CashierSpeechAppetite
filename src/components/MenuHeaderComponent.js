@@ -21,7 +21,7 @@ export default function MenuHeaderComponent(props) {
             </div>
             <div className="header-button"><button id='btn-add'><div>Add New</div><img src={add}></img></button>
             <button 
-                className={'btn-filter' + filter_button_class}                
+                className={filter_button_class}                
                 onClick={() => handleFilterClick()}><img src={filter}></img>FILTERS</button></div>
         </div>
     );

@@ -134,7 +134,7 @@ class MenuContainer extends Component{
         const handleApplyFiltersClick = this.handleApplyFiltersClick;
 
         const filter_class = (filter_visible) ? '' : 'hide';
-        const filter_button_class = (filter_visible) ? 'hide' : '';
+        const filter_button_class = (filter_visible) ? 'hide' : 'btn-filter';
         const menu_cards = (
                 menu_display 
                 ?
