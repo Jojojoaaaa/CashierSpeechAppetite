@@ -113,17 +113,8 @@ class MenuCardContainer extends Component{
             edit_mode: false
         }); 
     }
-    handleNameChange = (name) => {
-        this.setState({name: name});
-    }
-    handleDescChange = (desc) => {
-        this.setState({desc: desc});
-    }
-    handlePriceChange = (price) => {
-        this.setState({price: price});
-    }
-    handleServingsChange = (servings) => {
-        this.setState({servings: servings});
+    handleInputChange = (state, value) => {
+        this.setState({[state]: value});
     }
     handlePictureChange = (picture) => {
         this.getBase64(picture).then(base64 => {
@@ -163,10 +154,7 @@ class MenuCardContainer extends Component{
             } = this.state;
         const categories = this.props.categories;
         const handleEditMode = this.handleEditMode;   
-        const handleNameChange = this.handleNameChange;
-        const handleDescChange = this.handleDescChange;
-        const handlePriceChange = this.handlePriceChange;
-        const handleServingsChange = this.handleServingsChange;
+        const handleInputChange = this.handleInputChange;
         const handlePictureChange = this.handlePictureChange;
         const handleCategoryClick = this.handleCategoryClick;
         const handleCategorySelect = this.handleCategorySelect;
@@ -174,20 +162,11 @@ class MenuCardContainer extends Component{
         const handleImageClick = this.handleImageClick;
         const handleSaveClick = this.handleSaveClick;
 
-
-        const edit_button_class = (edit_mode) ? 'hide' : '';
-        const options_class = (edit_mode) ? '' : 'hide';
-        const category_class = (category_edit_mode) ? 'hide' : '';
-        const category_options_class = (category_edit_mode) ? '' : 'hide';
-        const image_class = (image_edit_mode) ? 'hide' : '';
-        const image_picker_class = (image_edit_mode) ? '' : 'hide';
         return (
             <MenuCardComponent
                 edit_mode={edit_mode}
-                edit_button_class={edit_button_class}
-                options_class={options_class}
-                image_class={image_class}
-                image_picker_class={image_picker_class}
+                image_edit_mode={image_edit_mode}
+                category_edit_mode={category_edit_mode}
                 image_source={image_source}
                 name={name}
                 desc={desc}
@@ -196,12 +175,7 @@ class MenuCardContainer extends Component{
                 cat_image_source={cat_image_source}  
                 categories={categories}
                 handleEditMode={handleEditMode}
-                category_class={category_class}
-                category_options_class={category_options_class}
-                handleNameChange={handleNameChange}
-                handleDescChange={handleDescChange}
-                handlePriceChange={handlePriceChange}
-                handleServingsChange={handleServingsChange}
+                handleInputChange={handleInputChange}
                 handleCategoryClick={handleCategoryClick}
                 handleCategorySelect={handleCategorySelect}
                 handleCancelClick={handleCancelClick}
