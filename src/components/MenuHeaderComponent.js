@@ -5,7 +5,8 @@ import filter from '../assets/menu/icon-filter.svg';
 export default function MenuHeaderComponent(props) {
     const {
         handleFilterClick,
-        filter_button_class
+        filter_button_class,
+        handleSearchQueryChange,
     }  = props; 
     return (
         <div className='menu-header-box'>
@@ -15,8 +16,8 @@ export default function MenuHeaderComponent(props) {
                 <input 
                     id='input-box'
                     type='text'
-                    placeholder='Enter menu name'/>
-                <button id='btn-find'>FIND</button>
+                    placeholder='Enter menu name'
+                    onChange={(e) => handleSearchQueryChange(e.target.value)}/>
             </div>
             </div>
             <div className="header-button"><button id='btn-add'><div>Add New</div><img src={add}></img></button>

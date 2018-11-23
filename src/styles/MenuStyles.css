@@ -62,11 +62,12 @@
     color: #C05B5A;
     font-weight: bolder;
     font-size: 14px;
+    background-color: transparent;
 
 }
 
 #btn-find:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .header-button{
