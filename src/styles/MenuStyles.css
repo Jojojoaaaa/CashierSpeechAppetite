@@ -1,6 +1,6 @@
 .menu-container {
     background-color: brown;
-    height: 93vh;
+    height: 91vh;
     display: flex;
     flex-direction: row;
 }
@@ -18,6 +18,101 @@
     background-color: yellowgreen;
     height: 15%;
 }
+.menu-header-box {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 0 50px 0 50px;
+    height: 100%;
+    align-items: center;
+}
+
+.header-search{
+    flex:4;
+}
+
+.search-box{
+    width: fit-content;
+    background-color: white;
+    padding: 5px;
+    border-radius: 15px;
+    box-shadow:0 5px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+#text-heading{
+    font-size: 48px;
+    font-weight: bolder;
+    color: #C0AC80;
+    flex: 1;
+}
+
+#input-box{
+    border: 0;
+    width: 250px;
+    height: 25px;
+    font-size: 12px;
+    margin-right: 5px;
+    padding-left: 15px;
+}
+
+
+#btn-find{
+    height: 20px;
+    border: 0;
+    color: #C05B5A;
+    font-weight: bolder;
+    font-size: 14px;
+
+}
+
+#btn-find:hover{
+    transform: scale(1.1);
+}
+
+.header-button{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#btn-add{
+    height: 40px;
+    border: 0;
+    background: #EDC589;
+    color: white;
+    font-weight: bolder;
+    font-size: 12px;
+    text-align: center;
+    text-justify: center;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100px;
+    justify-content: space-between;
+    border-radius: 25px;
+    margin-right: 50px;
+}
+
+#btn-add:hover{
+    transform: scale(1.1);
+}
+
+
+.btn-filter{
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #C0AC80;
+    display: flex;
+    justify-content: space-between;
+    width: 95px;
+}
+
+.btn-filter:hover{
+    transform: scale(1.1);
+}
+
 .menu-cards {
     background-color: darkslategrey;
     width: 100%;
