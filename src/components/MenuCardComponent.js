@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
 
+import def from '../assets/menu/vertical-logo.png';
 export default function MenuCardComponent(props) {
     const {
         edit_mode,
@@ -61,7 +62,8 @@ export default function MenuCardComponent(props) {
                     onChange={(pictures) => handlePictureChange(pictures[pictures.length-1])}
                     imgExtension={['.jpg', '.png']}
                     maxFileSize={5242880}/>
-                <img  
+                <img
+                    alt=''
                     id={'menu-profile-image'}
                     className={'class-mo-mae '+image_class}
                     onClick={()=>handleImageClick()}
