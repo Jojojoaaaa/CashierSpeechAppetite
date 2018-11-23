@@ -258,11 +258,19 @@
     display: flex;
     flex-direction: row;
 }
+
+/* Menu Card Component */
 .menu-card {
     background-color: sienna;
     height: 80%;
     width: 20%;
     margin: 2%;
+}
+.card-edit{
+    
+}
+.button-edit:hover{
+    transform: scale(1.1);
 }
 .menu-input {
     background-color: transparent;
