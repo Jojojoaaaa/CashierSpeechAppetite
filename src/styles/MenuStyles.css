@@ -105,6 +105,7 @@
     font-weight: bold;
     color: #C0AC80;
     display: flex;
+    background-color: transparent;
     justify-content: space-between;
     width: 95px;
 }
