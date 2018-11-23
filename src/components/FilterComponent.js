@@ -4,6 +4,10 @@ export default function FilterComponent(props) {
     const {
         handleFilterClick,
         handleCategoryClick,
+        handleMenuSortName,
+        handleMenuSortPrice,
+        handleMenuSortServings,
+        handleApplyFiltersClick,
         categories
     } = props;
     
@@ -27,13 +31,19 @@ export default function FilterComponent(props) {
             onClick={() => handleFilterClick()}>FILTER</button>
             <div>Sort By</div>
             <div>
-                <button>A-Z</button>
-                <button>PRICE</button>
+                <button
+                    onClick={() => handleMenuSortName()}>A-Z</button>
+                <button
+                    onClick={() => handleMenuSortPrice()}>Price</button>
+                <button
+                    onClick={() => handleMenuSortServings()}>Servings</button>
             </div>
             <div>Filter by Category</div>
             <div>
                 {categories_check}
             </div>
+            <button
+                onClick={() => handleApplyFiltersClick()}>APPLY FILTERS</button>
        </div>
     );
 }

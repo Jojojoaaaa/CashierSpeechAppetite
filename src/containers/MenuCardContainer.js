@@ -88,6 +88,7 @@ class MenuCardContainer extends Component{
             category_name
         } = this.state
         let {image_source} = this.state;
+        //image is a base64 encoded image 
         const image = image_source.split(',')[1];
 
         const id = this.id;
