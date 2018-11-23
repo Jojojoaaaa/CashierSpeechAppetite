@@ -16,6 +16,7 @@ class MenuContainer extends Component{
         super(props);
         this.state = {
             menu: [],
+            menu_display: [],
             categories: [],
             category_filters: [],
             filter_visible: false,
@@ -30,6 +31,7 @@ class MenuContainer extends Component{
             .then(response => {
                 this.setState({
                     menu: response.data.menu,
+                    menu_display: response.data.menu,
                     categories: response.data.category});
             })
             .catch(error => {
@@ -45,33 +47,98 @@ class MenuContainer extends Component{
     handleCategoryClick = (category) => {
         let category_filters = [...this.state.category_filters];
         if (category_filters.includes(category)) {
-            // arr = arr.filter(item => item !== value)
             category_filters = category_filters.filter(c => c !== category);
             this.setState({category_filters: category_filters});
-            console.log('remove',category_filters);
         }
         else {
             category_filters = [...category_filters, category];
             this.setState({category_filters: category_filters});
-            console.log('new',category_filters);
         }
+    }
+    handleMenuSortName = () => {
+        let menu_display = [...this.state.menu_display];
+        menu_display.sort(this.sortName);
+        let menu = [...this.state.menu];
+        menu.sort(this.sortName);
+        this.setState({
+            menu_display: menu_display,
+            menu: menu});
+    }
+    handleMenuSortPrice = () => {
+        let menu_display = [...this.state.menu_display];
+        menu_display.sort(this.sortPrice);
+        let menu = [...this.state.menu];
+        menu.sort(this.sortPrice);
+        this.setState({
+            menu_display: menu_display,
+            menu: menu});
+    }
+    handleMenuSortServings =() => {
+        let menu_display = [...this.state.menu_display];
+        menu_display.sort(this.sortServings);
+        let menu = [...this.state.menu];
+        menu.sort(this.sortServings);
+        this.setState({
+            menu_display: menu_display,
+            menu: menu});
+    }
+    handleApplyFiltersClick = () => {
+        const {category_filters, menu} = this.state;
+
+        if (category_filters[0]) {
+            let filtered_menu = [];
+            category_filters.forEach(category => {
+                //const fil_men =  menu_display.filter(menu => menu.category === category);
+                filtered_menu = [...filtered_menu, ...menu.filter(menu => menu.category === category)];
+            });
+            this.setState({menu_display: filtered_menu})
+        }
+        else {
+            const {menu} = this.state;
+            this.setState({menu_display: menu});
+        }
+    }
+    sortName = (a, b) => {
+        if (a.name < b.name)
+            return -1;
+        if (a.name > b.name)
+            return 1;
+        return 0;
+    }
+    sortPrice = (a, b) => {
+        if (a.price < b.price)
+            return -1;
+        if (a.price > b.prie)
+            return 1;
+        return 0;
+    }
+    sortServings = (a, b) => {
+        if (a.servings < b.servings)
+            return -1;
+        if (a.servings > b.servings)
+            return 1;
+        return 0;
     }
     render() {
         const {
-                menu,
+                menu_display,
                 categories,
                 filter_visible
             } = this.state;
 
         const handleFilterClick = this.handleFilterClick;
         const handleCategoryClick = this.handleCategoryClick;
+        const handleMenuSortName = this.handleMenuSortName;
+        const handleMenuSortPrice = this.handleMenuSortPrice;
+        const handleMenuSortServings = this.handleMenuSortServings;
+        const handleApplyFiltersClick = this.handleApplyFiltersClick;
 
         const filter_class = (filter_visible) ? '' : 'hide';
         const filter_button_class = (filter_visible) ? 'hide' : '';
         const menu_cards = (
-                menu 
+                menu_display 
                 ?
-                menu.map(m => (
+                menu_display.map(m => (
                     <MenuCardContainer 
                     key={m.id} 
                     id={m.id}
@@ -97,7 +164,11 @@ class MenuContainer extends Component{
                     <FilterComponent
                         handleFilterClick={handleFilterClick}
                         categories={categories}
-                        handleCategoryClick={handleCategoryClick}/>
+                        handleCategoryClick={handleCategoryClick}
+                        handleMenuSortName={handleMenuSortName}
+                        handleMenuSortPrice={handleMenuSortPrice}
+                        handleMenuSortServings={handleMenuSortServings}
+                        handleApplyFiltersClick={handleApplyFiltersClick}/>
                 </div>
             </div>
 
