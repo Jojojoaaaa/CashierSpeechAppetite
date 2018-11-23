@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
 
+import edit from '../assets/menu/icon-edit.svg';
 export default function MenuCardComponent(props) {
     const {
         edit_mode,
@@ -46,9 +47,11 @@ export default function MenuCardComponent(props) {
                 null;
     return (
         <div className='menu-card'>
-            <button 
-                className={'class-mo-mae '+edit_button_class}
-                onClick={()=>handleEditMode()}>EDIT</button>
+            <div className='card-edit'>
+                <img src={edit}
+                className={'button-edit'+ edit_button_class}
+                onClick={()=>handleEditMode()}></img>
+            </div>
             <div className={'image-section'}>
                 <ImageUploader
                     className={'class-mo-mae '+image_picker_class}
@@ -61,7 +64,8 @@ export default function MenuCardComponent(props) {
                     onChange={(pictures) => handlePictureChange(pictures[pictures.length-1])}
                     imgExtension={['.jpg', '.png']}
                     maxFileSize={5242880}/>
-                <img  
+                <img
+                    alt=''
                     id={'menu-profile-image'}
                     className={'class-mo-mae '+image_class}
                     onClick={()=>handleImageClick()}
