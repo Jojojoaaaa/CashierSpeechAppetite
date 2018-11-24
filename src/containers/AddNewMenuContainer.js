@@ -5,12 +5,14 @@ import axios from '../axios';
 import * as url from '../constants/urls';
 import * as type from '../constants/type';
 
+import add_placeholder from '../assets/menu/add-placeholder.svg';
+import cat_placeholder from '../assets/menu/cat-placeholder.svg';
 class AddNewMenuContainer extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            image_source: "",
-            cat_image_source: "",
+            image_source: add_placeholder ,
+            cat_image_source: cat_placeholder,
             name: "",
             desc: "",
             servings: 0,

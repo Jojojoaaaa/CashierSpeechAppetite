@@ -34,13 +34,12 @@ export default function AddNewMenuComponent(props) {
             : 
                 null;
     return (
-        <div className='menu-card'>
+        <div className='add-menu-card'>
             <div className={'image-section'}>
                 {!image_edit_mode
                     ?
-                    <img  
-                    id={'menu-profile-image'}
-                    className={'class-mo-mae'}
+                    <img
+                    className={'menu-profile-image'}
                     // alt=''
                     onClick={()=>handleImageClick()}
                     src={image_source}></img> 
@@ -59,60 +58,84 @@ export default function AddNewMenuComponent(props) {
                     />
                 }
             </div>
-            <input
-                className='menu-input'
-                type='text'
-                placeholder='Enter Menu Name'
-                value={name}
-                onChange={(e)=> handleInputChange('name', e.target.value)}
-                />
-            <textarea 
-                className='menu-input-desc'
-                type='text'
-                placeholder='Enter Menu Description'
-                rows="3"
-                cols="37"
-                value={desc}
-                onChange={(e) => handleInputChange('desc',e.target.value)}
-                />
-            <br/>
-            <input
-                className='menu-input'
-                type='number'
-                placeholder='Enter Price'
-                value={price}
-                onChange={(e) => handleInputChange('price',e.target.value)}
-                />
-            <input 
-                className='menu-input'
-                type='number'
-                placeholder='Enter Servings'
-                value={servings}
-                onChange={(e) => handleInputChange('servings',e.target.value)}
-                /> 
-            <br/>
-            <div className='menu-category'> 
-            {category_edit_mode
-                ?
-                    <div className={'dropdown-content'}>
-                        {categories_dropdown}
+            <div className='card-content-box'>
+                <div className='menu-name'>
+                <textarea
+                    className='menu-input'
+                    id='input-name'
+                    type='text'
+                    placeholder='Enter Menu Name'
+                    value={name}
+                    onChange={(e)=> handleInputChange('name', e.target.value)}
+                    />
+                </div>
+                <div className='menu-desc'>
+                <textarea 
+                    className='menu-input-desc'
+                    type='text'
+                    placeholder='Enter Menu Description'
+                    rows="3"
+                    cols="37"
+                    value={desc}
+                    onChange={(e) => handleInputChange('desc',e.target.value)}
+                    />
+                </div>
+                <div className='menu-price'>
+                    <div id='price-text'>Php</div>
+                        <div><input
+                            className='menu-input'
+                            id='input-price'
+                            type='number'
+                            placeholder='Enter Price'
+                            value={price}
+                            onChange={(e) => handleInputChange('price',e.target.value)}
+                            />
                     </div>
-                :
-                    <img 
-                        id='category-image' 
-                        className={'class-mo-mae'}
-                        src={cat_image_source}
-                        onClick={() => handleCategoryClick()}/> 
-            }
+                </div>
+                <div className='menu-servings'>
+                <div id='input-servings'>
+                <input 
+                    className='menu-input'
+                    id='input-servings'
+                    type='number'
+                    placeholder='Enter Servings'
+                    value={servings}
+                    onChange={(e) => handleInputChange('servings',e.target.value)}/>
+                    </div> 
+                <div id='servings-text'>Servings</div>
+                </div>
+                <div className='menu-category'>
+                    <div className='category-flex'>
+                        {category_edit_mode
+                            ?
+                                <div className={'dropdown-content'}>
+                                    {categories_dropdown}
+                                </div>
+                            :
+                                <img 
+                                    id='category-image' 
+                                    className={'class-mo-mae'}
+                                    src={cat_image_source}
+                                    onClick={() => handleCategoryClick()}/> 
+
+                        }
+                    </div>
+                    <div className='menu-button'>
+                        <div>
+                            <button
+                                className='button-menu'
+                                id='button-stroke'
+                                onClick={()=>handleCancelAdd()}
+                                >Cancel</button>
+                            <button
+                                className='button-menu'
+                                id='button-fill'
+                                // onClick={() => handleSaveClick()}
+                                >Save</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button
-                className={'class-mo-mae '}
-                onClick={()=>handleCancelAdd()}
-                >Cancel</button>
-            <button
-                className={'class-mo-mae '}
-                // onClick={() => handleSaveClick()}
-                >Save</button>
         </div>
     );
 }

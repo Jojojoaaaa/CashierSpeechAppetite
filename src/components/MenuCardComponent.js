@@ -73,8 +73,7 @@ export default function MenuCardComponent(props) {
                     :
                         <img
                             alt=''
-                            id={'menu-profile-image'}
-                            className={'class-mo-mae '}
+                            className={'menu-profile-image'}
                             onClick={()=>handleImageClick()}
                             src={image_source}></img>
                 }
@@ -102,57 +101,59 @@ export default function MenuCardComponent(props) {
                 </div>
                 <div className='menu-price'>
                     <div id='price-text'>Php</div>
-                    <div><input
-                        className='menu-input'
-                        id='input-price'
-                        type='number'
-                        value={(price)}
-                        disabled={!edit_mode}
-                        onChange={(e) => handleInputChange('price',e.target.value)}/>
-                    </div>
+                        <div><input
+                            className='menu-input'
+                            id='input-price'
+                            type='number'
+                            value={(price)}
+                            disabled={!edit_mode}
+                            onChange={(e) => handleInputChange('price',e.target.value)}/>
+                        </div>
                 </div>
                 <div className='menu-servings'>
-                <div id='input-servings'><input 
+                <div id='input-servings'>
+                <input 
                     className='menu-input'
                     id='input-servings'
                     type='number'
                     value={servings}
                     disabled={!edit_mode}
-                    onChange={(e) => handleInputChange('servings',e.target.value)}/></div>
+                    onChange={(e) => handleInputChange('servings',e.target.value)}/>
+                    </div>
                     <div id='servings-text'> Servings</div>
                 </div>
                 <div className='menu-category'> 
-                <div className='category-flex'>
-                    {category_edit_mode
-                        ?
-                            <div className={'dropdown-content'}>
-                                {categories_dropdown}
-                            </div>
-                        :
-                            <img 
-                                id='category-image' 
-                                className={'class-mo-mae'}
-                                src={cat_image_source}
-                                onClick={() => handleCategoryClick()}/>
-                    }
-                </div>
-                <div className='menu-button'>
-                {edit_mode
-                    ?
-                    <div>
-                        <button
-                            className='button-menu'
-                            id={'button-stroke'}
-                            onClick={()=>handleCancelClick()}>Cancel</button>
-                        <button
-                            className='button-menu'
-                            id={'button-fill'}
-                            onClick={() => handleSaveClick()}>Save</button>
+                    <div className='category-flex'>
+                        {category_edit_mode
+                            ?
+                                <div className={'dropdown-content'}>
+                                    {categories_dropdown}
+                                </div>
+                            :
+                                <img 
+                                    id='category-image' 
+                                    className={'class-mo-mae'}
+                                    src={cat_image_source}
+                                    onClick={() => handleCategoryClick()}/>
+                        }
                     </div>
-                    :
-                    null
-                }
-                </div>
+                    <div className='menu-button'>
+                    {edit_mode
+                        ?
+                        <div>
+                            <button
+                                className='button-menu'
+                                id='button-stroke'
+                                onClick={()=>handleCancelClick()}>Cancel</button>
+                            <button
+                                className='button-menu'
+                                id='button-fill'
+                                onClick={() => handleSaveClick()}>Save</button>
+                        </div>
+                        :
+                        null
+                    }
+                    </div>
             </div>
             </div>
         </div>

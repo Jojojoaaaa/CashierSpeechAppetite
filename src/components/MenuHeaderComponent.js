@@ -23,12 +23,14 @@ export default function MenuHeaderComponent(props) {
             </div>
             </div>
             <div className="header-button">
+            <button id='btn-cat'><div>Add Category</div><img src={add}></img></button>
             {!add_menu 
                 ?
                 <button id='btn-add' onClick={() => handleAddMenuClick()}><div>Add New</div><img src={add}></img></button>
                 :
                 null
             }
+            
             {!filter_visible
                 ?
                 (<button className='btn-filter' onClick={() => handleFilterClick()}><img src={filter}></img>FILTERS</button>)
