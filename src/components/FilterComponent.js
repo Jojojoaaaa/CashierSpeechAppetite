@@ -10,7 +10,8 @@ export default function FilterComponent(props) {
         handleMenuSortPrice,
         handleMenuSortServings,
         handleApplyFiltersClick,
-        categories
+        categories,
+        sort_by
     } = props;
     
     const categories_check = 
@@ -28,6 +29,9 @@ export default function FilterComponent(props) {
             )
         :
             null;
+        const az_class = (sort_by==='name') ? 'button-sort selected' : 'button-sort';
+        const price_class = (sort_by==='price') ? 'button-sort selected' : 'button-sort';
+        const servings_class = (sort_by==='servings') ? 'button-sort selected' : 'button-sort';
     return (
         <div className='filter-box'>
             <div className="filter-content">
@@ -42,15 +46,15 @@ export default function FilterComponent(props) {
                     <div className='text-heading'>Sort By</div>
                     <div className='sort-buttons'>
                         <button
-                            className='button-sort'
+                            className={az_class}
                             id='button-sort-name'
                             onClick={() => handleMenuSortName()}>A-Z</button>
                         <button
-                            className='button-sort'
+                            className={price_class}
                             id='button-sort-price'
                             onClick={() => handleMenuSortPrice()}>Price</button>
                         <button
-                            className='button-sort'
+                            className={servings_class}
                             id='button-sort-servings'
                             onClick={() => handleMenuSortServings()}>Servings</button>
                     </div>

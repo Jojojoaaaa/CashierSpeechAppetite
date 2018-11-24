@@ -3,11 +3,13 @@ import moment from 'moment';
 
 import axios from '../axios';
 import * as url from '../constants/urls'
-import * as status from '../constants/type';
+import * as type from '../constants/type';
 
 import OrdersComponent from '../components/OrdersComponent';
 import OrderComponent from '../components/OrderComponent';
 import InvoiceComponent from '../components/InvoiceComponent';
+import ModalComponent from '../components/ModalComponent';
+import PrompModalComponent from '../components/PromptModalComponent';
 
 class CashierContainer extends Component{
     constructor(props) {
@@ -15,7 +17,12 @@ class CashierContainer extends Component{
         this.state = {
             orders: [],
             selected_order: {},
-            printed: false
+            printed: false,
+            modal_type: '',
+            modal_message: '',
+            show_modal: false,
+            show_prompt: false,
+            confirm_method: '',
         }
     }
     componentWillMount() {
@@ -26,8 +33,14 @@ class CashierContainer extends Component{
     componentWillUnmount() {
         clearTimeout(this.update);
     }
+
+    handleHideModal = () => {
+        this.setState({
+            show_modal: false
+        })
+    }
     retrieveAllOrders = () => {
-       const post_data = {status: status.SERVED};
+       const post_data = {status: type.SERVED};
 
        axios.post(url.RETRIEVE_ORDERS, post_data)
         .then(response => {
@@ -35,7 +48,11 @@ class CashierContainer extends Component{
             this.setState({orders: orders})
         })
         .catch(error => {
-            alert(error.message);
+            this.setState({
+                show_modal: true,
+                modal_type: type.ERROR,
+                modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE
+            })
             clearTimeout(this.update);
         })
         this.update = setTimeout(this.retrieveAllOrders, 2000);
@@ -54,7 +71,11 @@ class CashierContainer extends Component{
                 }
             })
             .catch(error => {
-                alert(error.message);
+                this.setState({
+                    show_modal: true,
+                    modal_type: type.ERROR,
+                    modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE
+                })
             })
     }
     setPrinted = () => {
@@ -64,23 +85,48 @@ class CashierContainer extends Component{
         this.setState({printed: false});
     }
     handleCheckOut = () => {
+        this.setState({
+            show_prompt: true,
+            modal_message: 'Are you sure you want to checkout?',
+            confirm_method: () => this.checkout()
+        })
+    }
+    handleCancel = () => {
+        this.setState({
+            show_prompt: false
+        })
+    }
+    checkout = () => {
         const post_data = {
             order_id: this.state.selected_order.id,
-            status_update: status.PAID
+            status_update: type.PAID
         }
         axios.post(url.UPDATE_ORDERS_STATUS, post_data)
             .then(response => {
                 if (response.data > 0) {
-                    alert('Order has been updated.');
+                    this.setState({
+                        show_prompt: false,
+                        show_modal: true,
+                        modal_message: 'Order has been updated.',
+                        modal_type: type.SUCCESS
+                    })
                     this.setPrintedFalse();
                     this.clearSelectedOrder();
                 }
                   else {
-                    alert('Something went wrong...');
+                    this.setState({
+                        show_modal: true,
+                        modal_message: 'Something went wrong...',
+                        modal_type: type.ERROR
+                    })
                 }
             })
             .catch(error => {
-                alert(error.message);
+                this.setState({
+                    show_modal: true,
+                    modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE,
+                    modal_type: type.ERROR
+                })
               });
     }
    render() {
@@ -88,13 +134,44 @@ class CashierContainer extends Component{
            orders,
            selected_order,
            printed, 
+           modal_message,
+           modal_type,
+           show_modal,
+           show_prompt, 
+           confirm_method,
             } = this.state;
         
        const handleOrderClick = this.handleOrderClick;
        const setPrinted = this.setPrinted;
        const handleCheckOut = this.handleCheckOut;
+       const handleHideModal = this.handleHideModal;
+       const handleCancel =this.handleCancel;
+            
+       const modal = (
+            show_modal 
+                ?
+                    <ModalComponent
+                        modal_message={modal_message}
+                        modal_type={modal_type}
+                        handleClick={handleHideModal}
+                    />
+                :
+                null
+       )
+       const prompt = (
+           show_prompt
+                ?
+                    <PrompModalComponent
+                        handleConfirm={confirm_method}
+                        handleDecline={handleCancel}
+                        modal_message={modal_message}/>
+                :
+                null
+       )
        return (
         <div className='cashier-container'>
+            {modal}
+            {prompt}
             <div className='orders'>
                 <OrdersComponent
                     selected_order={selected_order}
