@@ -1,6 +1,6 @@
 import React, {Component}from 'react';
 import MenuCardComponent from '../components/MenuCardComponent';
-
+import ModalComponent from '../components/ModalComponent';
 
 import axios from '../axios';
 import * as url from '../constants/urls';
@@ -20,7 +20,10 @@ class MenuCardContainer extends Component{
         category_edit_mode: false,
         category_name: '',
         image_edit_mode: false,
-        image_blob: ''
+        image_blob: '',
+        show_modal: false,
+        modal_type: '',
+        modal_message: ''
     }
     this.id = this.props.id;
    }
@@ -42,7 +45,13 @@ class MenuCardContainer extends Component{
                 category_name: menu_profile.category_name
             })
         })
-        .catch(error => alert(error.message));
+        .catch(error => {
+            this.setState({
+                show_modal: true,
+                modal_type: type.ERROR,
+                modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE
+            })
+        });
     }
     handleEditMode = () => {
        this.setState({
@@ -78,7 +87,13 @@ class MenuCardContainer extends Component{
                     category_name: category, 
                 });
             })
-            .catch(error => alert(error.message))    
+            .catch(error =>{
+                this.setState({
+                    show_modal: true,
+                    modal_type: type.ERROR,
+                    modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE
+                });
+            })    
     }
     handleSaveClick = () => {
         const {
@@ -94,27 +109,59 @@ class MenuCardContainer extends Component{
         const image = image_source.split(',')[1];
 
         const id = this.id;
+        let form_data = new FormData();
+        form_data.set('id', id);
+        form_data.set('name', name);
+        form_data.set('desc', desc);
+        form_data.set('price', price);
+        form_data.set('servings', servings);
+        form_data.set('category_name', category_name);
+        form_data.append('image', image_blob);
+
         const post_data = {
             id: id,
-            image: image_blob,
+            image: image,
             name: name,
             desc: desc,
             price: price,
             servings: servings,
             category_name: category_name
         };
- 
+        const header = {headers: {'Content-Type': 'multipart/form-data',}};
         axios.post(url.UPDATE_MENU_PROFILE, post_data)
             .then(response => {
-                console.log(response.data);
-                alert(response.data);
+                //console.log(response.data)
+                if (response.data === type.SUCCESS) {
+                    this.setState({
+                        show_modal: true,
+                        modal_message: 'Order has been updated',
+                        modal_type: type.SUCCESS
+                    })
+                }
+                else {
+                    this.setState({
+                        show_modal: true,
+                        modal_message: 'Something went wrong...',
+                        modal_type: type.ERROR
+                    })
+                }
+                //alert(response.data);
             })
             .catch(error => {
-                alert(error.message);
+                this.setState({
+                    show_modal: true,
+                    modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE,
+                    modal_type: type.ERROR
+                })
             })
         this.setState({
             edit_mode: false
         }); 
+    }
+    handleHideModal =() => {
+        this.setState({
+            show_modal: false
+        })
     }
     handleInputChange = (state, value) => {
         this.setState({[state]: value});
@@ -168,7 +215,10 @@ class MenuCardContainer extends Component{
                 servings,
                 cat_image_source,
                 category_edit_mode,
-                image_edit_mode
+                image_edit_mode,
+                show_modal,
+                modal_message,
+                modal_type
             } = this.state;
         const categories = this.props.categories;
         const handleEditMode = this.handleEditMode;   
@@ -179,9 +229,19 @@ class MenuCardContainer extends Component{
         const handleCancelClick = this.handleCancelClick;
         const handleImageClick = this.handleImageClick;
         const handleSaveClick = this.handleSaveClick;
+        const handleHideModal = this.handleHideModal;
 
         const menu_card_class = (edit_mode) ? 'menu-edit-mode' : '';
-
+        const modal = (
+            show_modal
+                ?
+                <ModalComponent
+                    modal_message={modal_message}
+                    modal_type={modal_type}
+                    handleClick={handleHideModal}/>
+                :
+                null
+        );
         return (
             <MenuCardComponent
                 edit_mode={edit_mode}
@@ -202,7 +262,9 @@ class MenuCardContainer extends Component{
                 handleCancelClick={handleCancelClick}
                 handlePictureChange={handlePictureChange}
                 handleImageClick={handleImageClick}
-                handleSaveClick={handleSaveClick}/>
+                handleSaveClick={handleSaveClick}>
+                {modal}
+                </MenuCardComponent>
         )
     }
 }

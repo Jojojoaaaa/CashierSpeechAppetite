@@ -3,6 +3,8 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import AdminContainer from '../containers/AdminContainer';
 import MenuContainer from '../containers/MenuContainer';
+import OrdersContainer from '../containers/OrdersContainer';
+
 import * as route from '../constants/routes';
 
 class AdminPage extends Component{
@@ -15,6 +17,7 @@ class AdminPage extends Component{
         <div>
             <Route exact path={route.MENU} component={MenuContainer}/>
             <Route exact path={route.ADMIN} component={AdminContainer}/>
+            <Route exact path={route.ORDERS} component={OrdersContainer}/>
         </div>
        )
    }
