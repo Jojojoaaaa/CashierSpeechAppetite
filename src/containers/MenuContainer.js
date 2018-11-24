@@ -5,12 +5,13 @@ import MenuHeaderComponent from '../components/MenuHeaderComponent';
 import MenuCardContainer from '../containers/MenuCardContainer'
 import AddNewMenuContainer from '../containers/AddNewMenuContainer';
 import FilterComponent from '../components/FilterComponent';
+import ModalComponent from '../components/ModalComponent';
 
 import '../styles/MenuStyles.css';
 
 import axios from '../axios';
 import * as url from '../constants/urls';
-
+import * as type from '../constants/type';
 
 class MenuContainer extends Component{
     constructor(props) {
@@ -23,6 +24,10 @@ class MenuContainer extends Component{
             category_filters: [],
             filter_visible: false,
             add_menu: false,
+            show_modal: false,
+            modal_type: '',
+            modal_message: '',
+            sort_by: ''
         }
     }
 
@@ -39,8 +44,17 @@ class MenuContainer extends Component{
                     () => this.groupMenu());
             })
             .catch(error => {
-                alert(error.message);
+                this.setState({
+                    show_modal: true,
+                    modal_type: type.ERROR,
+                    modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE
+                })
             })
+    }
+    handleCloseModal = () => {
+        this.setState({
+            show_modal: false
+        });
     }
     groupMenu = () => {
         const {categories, menu} = this.state;
@@ -73,6 +87,7 @@ class MenuContainer extends Component{
         let menu = [...this.state.menu];
         menu.sort(this.sortName);
         this.setState({
+            sort_by: 'name',
             menu_display: menu_display,
             menu: menu},
             () => this.groupMenu());
@@ -83,6 +98,7 @@ class MenuContainer extends Component{
         let menu = [...this.state.menu];
         menu.sort(this.sortPrice);
         this.setState({
+            sort_by: 'price',
             menu_display: menu_display,
             menu: menu},
             () => this.groupMenu());
@@ -93,6 +109,7 @@ class MenuContainer extends Component{
         let menu = [...this.state.menu];
         menu.sort(this.sortServings);
         this.setState({
+            sort_by: 'servings',
             menu_display: menu_display,
             menu: menu},
             () => this.groupMenu());
@@ -141,7 +158,7 @@ class MenuContainer extends Component{
     sortPrice = (a, b) => {
         if (a.price < b.price)
             return -1;
-        if (a.price > b.prie)
+        if (a.price > b.price)
             return 1;
         return 0;
     }
@@ -157,7 +174,11 @@ class MenuContainer extends Component{
                 menu_display,
                 categories,
                 filter_visible, 
-                add_menu
+                add_menu,
+                show_modal,
+                modal_type,
+                modal_message,
+                sort_by
             } = this.state;
 
         const handleFilterClick = this.handleFilterClick;
@@ -169,6 +190,7 @@ class MenuContainer extends Component{
         const handleSearchQueryChange = this.handleSearchQueryChange;
         const handleAddMenuClick = this.handleAddMenuClick;
         const handleCancelAdd = this.handleCancelAdd;
+        const handleCloseModal = this.handleCloseModal;
 
         const filter_class = (filter_visible) ? '' : 'hide';
         const menu_cards = (
@@ -184,6 +206,16 @@ class MenuContainer extends Component{
                 : 
                 null
             );
+        const modal = (
+            show_modal
+                ?
+                    <ModalComponent
+                        modal_type={modal_type}
+                        modal_message={modal_message}
+                        handleClick={handleCloseModal}/>
+                :
+                null
+        );
         return (
             <div className='menu-container'>
                 <div className='menu-content'>
@@ -197,6 +229,7 @@ class MenuContainer extends Component{
                             />                
                     </div>
                     <div className='menu-cards'>
+                    {modal}
                     {add_menu
                         ? 
                         (<AddNewMenuContainer
@@ -217,6 +250,7 @@ class MenuContainer extends Component{
                     handleMenuSortPrice={handleMenuSortPrice}
                     handleMenuSortServings={handleMenuSortServings}
                     handleApplyFiltersClick={handleApplyFiltersClick}
+                    sort_by={sort_by}
                     />
                 </div>
             </div>
