@@ -156,6 +156,7 @@ export default function MenuCardComponent(props) {
                     </div>
             </div>
             </div>
+            {props.children}
         </div>
     );
 }
