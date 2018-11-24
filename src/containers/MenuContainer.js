@@ -171,7 +171,6 @@ class MenuContainer extends Component{
         const handleCancelAdd = this.handleCancelAdd;
 
         const filter_class = (filter_visible) ? '' : 'hide';
-        
         const menu_cards = (
                 menu_display 
                 ?

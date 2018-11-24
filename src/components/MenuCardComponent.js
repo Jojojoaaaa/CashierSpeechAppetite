@@ -7,6 +7,7 @@ export default function MenuCardComponent(props) {
         edit_mode,
         image_edit_mode,
         category_edit_mode,
+        menu_card_class,
         image_source,
         name,
         desc,
@@ -39,17 +40,22 @@ export default function MenuCardComponent(props) {
             : 
                 null;
     return (
-        <div className='menu-card'>
-            <div className='card-edit'>
-                {edit_mode
-                    ?
-                    null
-                    :
-                    <img src={edit}
-                    className={'button-edit'}
-                    onClick={()=>handleEditMode()}></img>
-                }
+        //main container
+        <div className={'menu-card ' + menu_card_class}> 
+            {/* main parts */}
+            <div className="edit-flex">
+                <div className='card-edit'>
+                    {edit_mode
+                        ?
+                        null
+                        :
+                        <img src={edit}
+                        className='button-edit'
+                        onClick={()=>handleEditMode()}></img>
+                    }
+                </div>
             </div>
+             {/* main parts */}
             <div className={'image-section'}>
                 {image_edit_mode
                     ?
@@ -73,61 +79,82 @@ export default function MenuCardComponent(props) {
                             src={image_source}></img>
                 }
             </div>
-            <input
-                className='menu-input'
-                type='text'
-                value={name}
-                disabled={!edit_mode}
-                onChange={(e) => handleInputChange('name',e.target.value)}/>
-            <textarea 
-                className='menu-input-desc'
-                type='text'
-                value={desc}
-                rows="3"
-                cols="37"
-                disabled={!edit_mode}
-                onChange={(e) => handleInputChange('desc',e.target.value)}/>
-            <br/>
-            Php <input
-                className='menu-input'
-                type='number'
-                value={price}
-                disabled={!edit_mode}
-                onChange={(e) => handleInputChange('price',e.target.value)}/>
-            <input 
-                className='menu-input'
-                type='number'
-                value={servings}
-                disabled={!edit_mode}
-                onChange={(e) => handleInputChange('servings',e.target.value)}/> Servings 
-            <br/>
-            <div className='menu-category'> 
-                {category_edit_mode
-                    ?
-                        <div className={'dropdown-content'}>
-                            {categories_dropdown}
-                        </div>
-                    :
-                        <img 
-                            id='category-image' 
-                            className={'class-mo-mae'}
-                            src={cat_image_source}
-                            onClick={() => handleCategoryClick()}/>
-                }
-            </div>
-            {edit_mode
-                ?
-                <div>
-                    <button
-                        className={'class-mo-mae'}
-                        onClick={()=>handleCancelClick()}>Cancel</button>
-                    <button
-                        className={'class-mo-mae'}
-                        onClick={() => handleSaveClick()}>Save</button>
+             {/* main parts */}
+            <div className='card-content-box'>
+                <div className='menu-name'>            
+                    <textarea
+                    className='menu-input'
+                    id='input-name'
+                    type='text'
+                    value={name}
+                    disabled={!edit_mode}
+                    onChange={(e) => handleInputChange('name',e.target.value)}/>
                 </div>
-                :
-                null
-            }
+                <div className='menu-desc'>
+                    <textarea 
+                    className='menu-input-desc'
+                    type='text'
+                    value={desc}
+                    rows="3"
+                    cols="37"
+                    disabled={!edit_mode}
+                    onChange={(e) => handleInputChange('desc',e.target.value)}/>
+                </div>
+                <div className='menu-price'>
+                    <div id='price-text'>Php</div>
+                    <div><input
+                        className='menu-input'
+                        id='input-price'
+                        type='number'
+                        value={(price)}
+                        disabled={!edit_mode}
+                        onChange={(e) => handleInputChange('price',e.target.value)}/>
+                    </div>
+                </div>
+                <div className='menu-servings'>
+                <div id='input-servings'><input 
+                    className='menu-input'
+                    id='input-servings'
+                    type='number'
+                    value={servings}
+                    disabled={!edit_mode}
+                    onChange={(e) => handleInputChange('servings',e.target.value)}/></div>
+                    <div id='servings-text'> Servings</div>
+                </div>
+                <div className='menu-category'> 
+                <div className='category-flex'>
+                    {category_edit_mode
+                        ?
+                            <div className={'dropdown-content'}>
+                                {categories_dropdown}
+                            </div>
+                        :
+                            <img 
+                                id='category-image' 
+                                className={'class-mo-mae'}
+                                src={cat_image_source}
+                                onClick={() => handleCategoryClick()}/>
+                    }
+                </div>
+                <div className='menu-button'>
+                {edit_mode
+                    ?
+                    <div>
+                        <button
+                            className='button-menu'
+                            id={'button-stroke'}
+                            onClick={()=>handleCancelClick()}>Cancel</button>
+                        <button
+                            className='button-menu'
+                            id={'button-fill'}
+                            onClick={() => handleSaveClick()}>Save</button>
+                    </div>
+                    :
+                    null
+                }
+                </div>
+            </div>
+            </div>
         </div>
     );
 }

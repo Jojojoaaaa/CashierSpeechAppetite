@@ -162,11 +162,14 @@ class MenuCardContainer extends Component{
         const handleImageClick = this.handleImageClick;
         const handleSaveClick = this.handleSaveClick;
 
+        const menu_card_class = (edit_mode) ? 'menu-edit-mode' : '';
+
         return (
             <MenuCardComponent
                 edit_mode={edit_mode}
                 image_edit_mode={image_edit_mode}
                 category_edit_mode={category_edit_mode}
+                menu_card_class={menu_card_class}
                 image_source={image_source}
                 name={name}
                 desc={desc}
