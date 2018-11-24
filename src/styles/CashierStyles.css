@@ -142,7 +142,7 @@
 }
 
 .invoice-section {
-    /* display: none; */
+    display: none;
 }
 
 .invoice-table {
