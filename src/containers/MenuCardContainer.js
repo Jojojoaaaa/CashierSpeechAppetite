@@ -19,7 +19,8 @@ class MenuCardContainer extends Component{
         edit_mode: false,
         category_edit_mode: false,
         category_name: '',
-        image_edit_mode: false
+        image_edit_mode: false,
+        image_blob: ''
     }
     this.id = this.props.id;
    }
@@ -85,7 +86,8 @@ class MenuCardContainer extends Component{
             desc,
             price,
             servings,
-            category_name
+            category_name,
+            image_blob
         } = this.state
         let {image_source} = this.state;
         //image is a base64 encoded image 
@@ -94,7 +96,7 @@ class MenuCardContainer extends Component{
         const id = this.id;
         const post_data = {
             id: id,
-            image: image,
+            image: image_blob,
             name: name,
             desc: desc,
             price: price,
@@ -104,6 +106,7 @@ class MenuCardContainer extends Component{
  
         axios.post(url.UPDATE_MENU_PROFILE, post_data)
             .then(response => {
+                console.log(response.data);
                 alert(response.data);
             })
             .catch(error => {
@@ -117,12 +120,19 @@ class MenuCardContainer extends Component{
         this.setState({[state]: value});
     }
     handlePictureChange = (picture) => {
+        this.setState({picture: picture});
         this.getBase64(picture).then(base64 => {
            this.setState({
                image_source: base64,
                image_edit_mode: false
            });
           });
+        this.getBlob(picture).then(blob => {
+           const b = new Blob ([new Uint8Array(blob)], {type : "image/jpeg"});
+            this.setState({
+                image_blob: b
+            })
+        });
     }
     handleImageClick = () => {
         const {edit_mode} =this.state;
@@ -139,6 +149,14 @@ class MenuCardContainer extends Component{
            reader.onerror = error => reject(error);
            reader.readAsDataURL(file);
         });
+    }
+    getBlob = (file) => {
+        return new Promise((resolve,reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            reader.readAsArrayBuffer(file);
+         });
     }
     render() {
         const {

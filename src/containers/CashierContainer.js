@@ -36,6 +36,7 @@ class CashierContainer extends Component{
         })
         .catch(error => {
             alert(error.message);
+            clearTimeout(this.update);
         })
         this.update = setTimeout(this.retrieveAllOrders, 2000);
     }

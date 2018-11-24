@@ -19,9 +19,9 @@ export default function FilterComponent(props) {
             categories.map(c => 
                 (
                     <div key={c} >
-                    <label class="container">{c}
+                    <label className="container">{c}
                     <input type="checkbox" onClick={(e) => handleCategoryClick(c)}/>
-                    <span class="checkmark"></span>
+                    <span className="checkmark"></span>
                     </label>
                     </div>
                 )
