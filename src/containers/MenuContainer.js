@@ -84,6 +84,7 @@ class MenuContainer extends Component{
     handleMenuSortName = () => {
         let menu_display = [...this.state.menu_display];
         menu_display.sort(this.sortName);
+        
         let menu = [...this.state.menu];
         menu.sort(this.sortName);
         this.setState({
@@ -138,7 +139,9 @@ class MenuContainer extends Component{
         }
         else {
             const {menu_display} = this.state;
-            const filtered_menu = menu_display.filter(menu => menu.name.includes(search_query));
+            var match = new RegExp(search_query, 'i');
+
+            const filtered_menu = menu_display.filter(menu => match.test(menu.name));
             this.setState({menu_display: filtered_menu});
         }
     };

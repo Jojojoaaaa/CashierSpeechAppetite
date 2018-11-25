@@ -10,10 +10,20 @@
     background-color: lavenderblush;
 }
 .orders-header {
-    background-color: yellowgreen;
     height: 15%;
 }
-.order-cards {
+.order-lines-header {
+    display: flex;
+    flex-direction: row;
+    background-color: yellow;
+}
+.order-line {
+    display: flex;
+    flex-direction: row;
+    background-color: violet;
+    width: 100%;
+}
+.order-lines {
     display: flex;
     background-color: forestgreen;
     width: 100%;
@@ -28,4 +38,12 @@
     width: 30%;
     height: 91vh;
     background-color: darkblue;
+}
+.order-header-box {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 0 50px 0 50px;
+    height: 100%;
+    align-items: center;
 }
