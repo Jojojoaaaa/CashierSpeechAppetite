@@ -98,21 +98,15 @@
 }
 
 #btn-cat{
-    height: 40px;
     border: 0;
-    background: #EDC589;
-    color: white;
-    font-weight: bolder;
-    font-size: 12px;
-    text-align: center;
-    text-justify: center;
-    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #C0AC80;
     display: flex;
-    align-items: center;
-    width: 130px;
+    background-color: transparent;
     justify-content: space-between;
-    border-radius: 25px;
-    margin-right: 50px;
+    width: 120px;
+    margin-right: 30px;
 }
 
 #btn-cat:hover{
@@ -289,7 +283,7 @@
 .menu-card {
     display: flex;
     flex-direction: column;
-    height: 70%;
+    height: 80%;
     width: 21%;
     margin: 1%;
     position: relative;
@@ -309,18 +303,27 @@
 }
 
 .card-edit{
-    position: absolute;
+    display: flex;
+    width: 100%;
+    margin: 8px;
+    justify-content: space-between;
 }
+    
 
 /* main part edit */
 .edit-flex{
     display: flex;
-    justify-content: flex-end;
+    width: 100%;
+    position: absolute;
+    flex-direction: row;
+
+
 }
+    
 
 /* main part image */
 .image-section{
-    display: flex;
+    height: 40%;
 }
 
 .menu-edit-mode{
@@ -416,7 +419,7 @@
     resize: none;
 }
 .menu-profile-image {
-    height: 0%;
+    height: 100%;
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -535,12 +538,12 @@
     border-width: 1px;
 }
 
-/* On mouse-over, add a grey background color */
+/* On hover, add a background color */
 .container:hover input ~ .checkmark {
     background-color: rgb(238, 211, 171);
 }
 
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add background */
 .container input:checked ~ .checkmark {
     background-color: #EDC589;
 }

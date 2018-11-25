@@ -1,5 +1,5 @@
 import React from 'react';
-
+import moment from 'moment'
 
 import admin from "../assets/header/icon-admin.svg"
 import logout from "../assets/header/btn-logout.svg"
@@ -16,7 +16,7 @@ export default function HeaderComponent(props) {
                 <div id="header-flex"><img src={admin} alt="" id="icon-admin"></img>
                     Admin 
                     <br/> 
-                    11/20/18
+                    {moment().format("l")}
                 </div>
                 <div id="header-flex"><img src={logout} alt="" className="button" onClick={() => handleLogout()}></img></div>
             </div>    
