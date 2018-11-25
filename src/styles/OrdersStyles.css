@@ -7,37 +7,77 @@
 .orders-content {
     height: 100%;
     width: 100%;
-    background-color: lavenderblush;
+    background-color: white;
 }
 .orders-header {
     height: 15%;
 }
+
+.orders-pdf{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 4%;
+}
+
+.button-pdf{
+    padding: 10px;  
+    border: 0;
+    color: #735C4B;
+    font-weight: bold;
+    border-radius: 25px;
+    box-shadow:0 5px 15px 0 rgba(0, 0, 0, 0.1);   
+}
+
+.button-pdf:hover{
+    background: #735C4B;
+    color: white;
+}
+
 .order-lines-header {
     display: flex;
     flex-direction: row;
-    background-color: yellow;
+    background-color: white;
+    color: rgb(179, 179, 179);
+    font-weight: bold; 
+    padding: 2% 7% 2% 7%;
 }
 .order-line {
     display: flex;
     flex-direction: row;
-    background-color: violet;
-    width: 100%;
+    background-color: white;;
+    height: 10%;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 55px 10px 55px;
+    padding: 0 3% 0 3%;
+    border-radius: 15px;
+    box-shadow:0 5px 20px 0 rgba(0, 0, 0, 0.1); 
+    color: #735C4B;
+    font-weight: bold; 
+}
+
+.flex-short{
+    flex: 1;
+}
+
+.flex-long{
+    flex:3
 }
 .order-lines {
-    display: flex;
-    background-color: forestgreen;
+    background-color: white;
     width: 100%;
-    height: 77vh;
+    height: 64vh;
     overflow-y: scroll;
-    flex-wrap: wrap;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+#text-emphasize{
+    color: #DA8C75;
 }
 .orders-filter {
     width: 30%;
     height: 91vh;
-    background-color: darkblue;
+    background-color: rgb(252, 246, 230);
 }
 .order-header-box {
     background-color: white;
@@ -46,4 +86,20 @@
     padding: 0 50px 0 50px;
     height: 100%;
     align-items: center;
+}
+
+/* Orders filter */
+.filter-date{
+    padding-top: 10%;
+    flex:7;
+}
+
+.button-filter-sort{
+    width: 30%;
+    border-style: solid;
+    border-color: #A89464;
+    color: #A89464;
+    background: transparent;
+    font-weight: bold;
+    padding: 5px;
 }

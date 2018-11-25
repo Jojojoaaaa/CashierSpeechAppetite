@@ -216,18 +216,18 @@
     color: white;
 }
 
-#button-sort-name{
+#button-sort-left{
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     border-width: 2px 1px 2px 2px;
 
 }
 
-#button-sort-price{
+#button-sort-middle{
     border-width: 2px 1px 2px 1px;
 }
 
-#button-sort-servings{
+#button-sort-right{
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     border-style: solid;
@@ -544,7 +544,7 @@
 }
 
 /* When the checkbox is checked, add background */
-.container input:checked ~ .checkmark {
+h.container input:checked ~ .checkmark {
     background-color: #EDC589;
 }
 

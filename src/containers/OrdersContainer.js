@@ -213,10 +213,12 @@ class OrdersContainer extends Component{
                     filter_visible={filter_visible}
                     handleSearchQueryChange={handleSearchQueryChange}/>
                 </div>
+                <div className='orders-pdf'>
                 <ReactToPrint
-                    trigger={() => <button>Export PDF</button>}
+                    trigger={() => <button className='button-pdf'>Export to PDF</button>}
                     content={() => this.ref}
                     />
+                </div>
                 <div  ref ={(el) =>this.ref = el}>
                     <OrderLinesHeaderComponent/>
                     <div className='order-lines'>
