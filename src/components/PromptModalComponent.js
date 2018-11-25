@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/ModalStyles.css';
 
+import question from '../assets/modal/icon-question.svg';
+
 export default function PromptModalComponent(props) {
     const {
        handleConfirm,
@@ -10,17 +12,24 @@ export default function PromptModalComponent(props) {
 
     return (
         <div id="myModal" className="modal">
-            <div className="modal-content">
+            <div className="modal-prompt">
+                <div className='modal-logo'>
                 <img
-                    alt = 'question mark'/>
-                <p>{modal_message}</p>
-                {props.children}
-                <span 
-                    className="close"
-                    onClick={()=>handleConfirm()}>Confirm</span>
-                <span 
-                    className="close"
-                    onClick={()=>handleDecline()}>Cancel</span>
+                    src={question}
+                    alt = ''/>
+                </div>
+                <div className='modal-box-content'>
+                    <div className='modal-message'>{modal_message}
+                    {props.children}</div>
+                    <div className='modal-buttons'>
+                        <button 
+                            className="button-stroke"
+                            onClick={()=>handleDecline()}>Cancel</button>
+                        <button 
+                            className="button-fill"
+                            onClick={()=>handleConfirm()}>Confirm</button>
+                    </div>
+                </div>
             </div>
         </div>  
     );

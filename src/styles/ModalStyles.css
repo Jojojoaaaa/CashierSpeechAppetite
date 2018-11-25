@@ -1,3 +1,4 @@
+/* Modal Component */
 .modal {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -11,17 +12,92 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content */
 .modal-content {
+    display: flex;
+    flex-direction: row;
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
     width: 30%;
+    border-radius: 5px;
+}
+
+.modal-prompt {
+    display: flex;
+    flex-direction: row;
+    background-color: #fefefe;
+    margin: auto;
+    height: 18%;
+    padding: 30px;
+    width: 30%;
+    border-radius: 5px;
+}
+
+.modal-logo{
+flex: 1;
+}
+
+.modal-box-content{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-message{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #502507;
+
+}
+
+.modal-buttons{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
+.button-fill {
+    background: #DA8C75;
+    padding: 5px;
+    border-radius: 15px;
+    width: 30%;
+    color: white;
+    margin: 6px;
+    border: 1;
+    border-color: #DA8C75;
+    border-style: solid;
+}
+
+.button-fill:hover{
+    transform: scale(1.2);
+}
+
+.button-stroke {
+    background: transparent;
+    border: 1;
+    border-color: #DA8C75;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 15px;
+    width: 30%;
+    color: #DA8C75;
+    margin: 6px;
+}
+
+.button-stroke:hover{
+    transform: scale(1.2);
+}
+
+.input-ip{
+    border-radius: 5px;
+    width: 55%;
+    height: 20px;
+    border: 0;
+    background-color:rgb(236, 233, 233);
 }

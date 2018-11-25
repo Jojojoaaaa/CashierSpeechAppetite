@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
 
+import del from '../assets/menu/icon-delete.svg';
 import edit from '../assets/menu/icon-edit.svg';
 export default function MenuCardComponent(props) {
     const {
@@ -44,16 +45,18 @@ export default function MenuCardComponent(props) {
         <div className={'menu-card ' + menu_card_class}> 
             {/* main parts */}
             <div className="edit-flex">
-                <div className='card-edit'>
                     {edit_mode
                         ?
                         null
                         :
-                        <img src={edit}
-                        className='button-edit'
-                        onClick={()=>handleEditMode()}></img>
+                        <div className='card-edit'>
+                            <img src={edit}
+                            className='button-edit'
+                            onClick={()=>handleEditMode()}></img>
+                            <img src={del} 
+                            className='button-edit'></img>
+                        </div>
                     }
-                </div>
             </div>
              {/* main parts */}
             <div className={'image-section'}>
@@ -61,7 +64,7 @@ export default function MenuCardComponent(props) {
                     ?
                         <ImageUploader
                             className={'class-mo-mae '}
-                            buttonClassName={'image-picker-button'}
+                            buttonClassName='image-picker-button'
                             withIcon={false}
                             withLabel={false}
                             buttonText='Choose Image'

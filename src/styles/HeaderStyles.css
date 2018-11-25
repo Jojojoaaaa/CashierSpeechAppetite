@@ -28,7 +28,7 @@
 
 .button:hover{
     color: rgb(168, 139, 77);
-    scale: 5%;
+    transform: scale(1.2);
 }
 
 #icon-admin{

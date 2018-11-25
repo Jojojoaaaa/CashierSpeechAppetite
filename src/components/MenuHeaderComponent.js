@@ -2,6 +2,7 @@ import React from 'react';
 
 import add from '../assets/menu/icon-add.svg';
 import filter from '../assets/menu/icon-filter.svg';
+import category from '../assets/menu/icon-category.svg';
 export default function MenuHeaderComponent(props) {
     const {
         add_menu,
@@ -23,14 +24,13 @@ export default function MenuHeaderComponent(props) {
             </div>
             </div>
             <div className="header-button">
-            <button id='btn-cat'><div>Add Category</div><img src={add}></img></button>
             {!add_menu 
                 ?
                 <button id='btn-add' onClick={() => handleAddMenuClick()}><div>Add New</div><img src={add}></img></button>
                 :
                 null
             }
-            
+            <button id='btn-cat'><img src={category}></img><div>CATEGORY</div></button>
             {!filter_visible
                 ?
                 (<button className='btn-filter' onClick={() => handleFilterClick()}><img src={filter}></img>FILTERS</button>)
