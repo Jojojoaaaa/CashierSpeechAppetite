@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: row;
 }
+
 /* main group */
 .orders {
     width: 30%;
@@ -231,8 +232,8 @@
 .receipt-content {
     display: flex;
     flex-direction: column;
-    padding: 35px;
     font-size: 14px;
+    /* padding 5px */
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -266,7 +267,7 @@
     flex: 1;
     flex-direction:row;
     position: relative;
-    padding: 10px;
+    padding: 20px 0 20px 0;
 }
 
 .receipt-item{
@@ -281,16 +282,18 @@
 
 .receipt-total{
     flex:1;
-    padding-top: 10px;
+    padding-top: 50px;
+
 }
 
 .total-flex{
     display: flex;
     justify-content: space-between;
+    padding: 0 0 10px 0;
 }
 
 .receipt-footer{
     flex: 1;
     text-align: center;
     padding-top: 50px;
-}
+} 

@@ -21,7 +21,8 @@ class HomePage extends Component{
         super(props);
         this.state = {
             show_modal: false,
-            modal_message: ''
+            modal_message: '',
+            confirm_method: '',
         }
     }
 
@@ -33,7 +34,8 @@ class HomePage extends Component{
     handleLogout = () => {
         this.setState({
             show_modal:true,
-            modal_message: 'Are you sure you want to log out?'
+            modal_message: 'Are you sure you want to log out?',
+            confirm_method : () => this.handleConfirmLogout()
         })
     }
     handleConfirmLogout = () => {
@@ -54,16 +56,16 @@ class HomePage extends Component{
         const {
             show_modal,
             modal_message,
+            confirm_method
         } = this.state;
 
         const handleLogout = this.handleLogout;
         const handleCancelLogout = this.handleCancelLogout;
-        const handleConfirmLogout = this.handleConfirmLogout;
         const modal = (
             show_modal
                 ?
                     <PromptModalComponent
-                        handleConfirm={handleConfirmLogout}
+                        handleConfirm={confirm_method}
                         handleDecline={handleCancelLogout}
                         modal_message={modal_message}/>
                 :

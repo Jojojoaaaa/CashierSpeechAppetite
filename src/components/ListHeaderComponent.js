@@ -10,12 +10,12 @@ export default function ListHeaderComponent(props) {
         wild_class
     } = props
     return (
-       <div className='order-lines-header'>
-           <div className='flex-short'>{column1}</div>
+       <div className='account-lines-header'>
+           <div className='account-short'>{column1}</div>
            <div className={wild_class}>{column2}</div>
-           <div className='flex-short'>{column3}</div>
-           <div className='flex-short'>{column4}</div>
-           <div className='flex-short'>{column5}</div>
+           <div className='account-short'>{column3}</div>
+           <div className='account-short'>{column4}</div>
+           <div className='account-short'>{column5}</div>
        </div>
     );
 }

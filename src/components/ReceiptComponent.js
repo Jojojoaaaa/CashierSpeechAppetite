@@ -7,6 +7,9 @@ import moment from 'moment';
 export default function ReceiptComponent(props) {
     const {
         selected_order,
+        valid,
+        change,
+        cash
     } = props;
     return (
        <div className='receipt-content'>
@@ -56,9 +59,19 @@ export default function ReceiptComponent(props) {
                     <div>Total Php</div> 
                     <div>{(selected_order.total).toFixed(2)}</div>
                 </div>
+                <div className="total-flex">
+                    <div hidden={!valid}>Cash</div> 
+                    <div hidden={!valid}>{(cash*1).toFixed(2)}</div>
+                    {/* (valid) ? cash.toFixed(2): 0 */}
+                </div>
+                <div className="total-flex" hidden={!valid}>
+                    <div hidden={!valid}>Change</div> 
+                    <div hidden={!valid}>{(change*1).toFixed(2)}</div>
+                    {/* (valid) ?change.toFixed(2): 0 */}
+                </div>
             </div>
 
-            <div className='receipt-footer'>
+            <div className='receipt-footer' hidden={!valid}>
                 {content.FOOTER}
             </div>
        </div>

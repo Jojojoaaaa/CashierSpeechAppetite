@@ -166,43 +166,45 @@ class AddNewAccountContainer extends Component{
                     <input 
                         value={first_name}
                         onChange={(e) => handleInputChange('first_name', e.target.value)}
-                        className='modal-add-input' 
+                        id='modal-add-input' 
                         type='text' 
                         placeholder='First Name'/>
                     <input 
                         value={last_name}
                         onChange={(e) => handleInputChange('last_name', e.target.value)}
-                        className='modal-add-input' 
+                        id='modal-add-input' 
                         type='text' 
                         placeholder='Last Name'/>
                     <input 
                         value={contact_number}
                         onChange={(e) => handleInputChange('contact_number', e.target.value)}
-                        className='modal-add-input' 
+                        id='modal-add-input' 
                         type='number' 
                         placeholder='Contact Number'/>
-                    <div>*password must be more than 5 characters* </div>
+                    <div className='text-prompt'>*password must be more than 5 characters* </div>
                     <input 
                         value={password}
                         onChange={(e) => handleInputChange('password', e.target.value)}                    
-                        className='modal-add-input'
+                        id='modal-add-input'
                         type='password' 
                         placeholder='Password'/>
                     <input 
                         value={confirm_password}
                         onChange={(e) => handleInputChange('confirm_password', e.target.value)}
-                        className='modal-add-input' 
+                        id='modal-add-input' 
                         type='password' 
                         placeholder='Confirm Password'/>
                     <input 
                         value={admin_password}
                         onChange={(e) => handleInputChange('admin_password', e.target.value)}
-                        className='modal-add-input' 
+                        id='modal-add-input' 
                         type='password' 
                         placeholder='Admin Password'/>
-                    <div>{prompt}</div>
-                    <button disabled={!valid} onClick={()=>handleAdd()}>Confirm</button>
-                    <button onClick={() => handleCancel()}>Cancel</button>
+                    <div className='text-prompt'>{prompt}</div>
+                    <div className='admin-buttons'>
+                    <button onClick={() => handleCancel()} className='button-menu' id='button-stroke'>Cancel</button>
+                    <button disabled={!valid} onClick={()=>handleAdd()} className='button-menu' id='button-fill'>Confirm</button>
+                    </div>
                 </div>
             </div>
         )

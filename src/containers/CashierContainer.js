@@ -7,7 +7,7 @@ import * as type from '../constants/type';
 
 import OrdersComponent from '../components/OrdersComponent';
 import OrderComponent from '../components/OrderComponent';
-import InvoiceComponent from '../components/InvoiceComponent';
+import InvoiceContainer from '../containers/InvoiceContainer';
 import ModalComponent from '../components/ModalComponent';
 import PrompModalComponent from '../components/PromptModalComponent';
 
@@ -17,7 +17,8 @@ class CashierContainer extends Component{
         this.state = {
             orders: [],
             selected_order: {},
-            printed: false,
+            printed_orders: [],
+            order_summaries: {},
             modal_type: '',
             modal_message: '',
             show_modal: false,
@@ -34,7 +35,18 @@ class CashierContainer extends Component{
     componentWillUnmount() {
         clearTimeout(this.update);
     }
+    onChangeCash =(selected_order, cash) => {
+        const total = selected_order.total;
+        const valid = (total<=cash);
+        const id = selected_order.id;
+        let order_summary = {valid: valid, cash: cash}
+        let order_summaries = {...this.state.order_summaries}
 
+        this.setState({
+           order_summaries: {...order_summaries, [id]:order_summary}
+        }, () => console.log(this.state.order_summaries));
+
+    }
     handleHideModal = () => {
         this.setState({
             show_modal: false
@@ -47,6 +59,7 @@ class CashierContainer extends Component{
        axios.post(url.RETRIEVE_ORDERS, post_data)
         .then(response => {
             const orders = response.data;
+            console.log(orders);
             this.setState({orders: orders})
         })
         .catch(error => {
@@ -67,9 +80,11 @@ class CashierContainer extends Component{
         axios.post(url.RETRIEVE_ORDER_INVOICE, post_data)
             .then(response => {
                 if (response.data.order_items.length > 0) {
-                    const selected_order = {...response.data, table_number: table_number}
+                    const {printed_orders} = this.state;
+                    let selected_order = {...response.data, table_number: table_number};
+                    const printed = (printed_orders.includes(selected_order.id));
+                    selected_order = {...selected_order, printed: printed};
                     this.setState({selected_order: selected_order})
-                    this.setPrintedFalse();
                 }
             })
             .catch(error => {
@@ -80,11 +95,10 @@ class CashierContainer extends Component{
                 })
             })
     }
-    setPrinted = () => {
-        this.setState({printed: true});
-    }
-    setPrintedFalse = () => {
-        this.setState({printed: false});
+    setPrinted = (id) => {
+        const {printed_orders, selected_order} = this.state;
+        this.setState({printed_orders: [...printed_orders, id], selected_order: {...selected_order, printed: true}});
+    
     }
     handleCheckOut = () => {
         this.setState({
@@ -112,7 +126,6 @@ class CashierContainer extends Component{
                         modal_message: 'Order has been updated.',
                         modal_type: type.SUCCESS
                     })
-                    this.setPrintedFalse();
                     this.clearSelectedOrder();
                 }
                   else {
@@ -135,18 +148,19 @@ class CashierContainer extends Component{
        const {
            orders,
            selected_order,
-           printed, 
            modal_message,
            modal_type,
            show_modal,
            show_prompt, 
            confirm_method,
+           order_summaries
             } = this.state;
        const handleOrderClick = this.handleOrderClick;
        const setPrinted = this.setPrinted;
        const handleCheckOut = this.handleCheckOut;
        const handleHideModal = this.handleHideModal;
        const handleCancel =this.handleCancel;
+       const onChangeCash = this.onChangeCash;
             
        const modal = (
             show_modal 
@@ -190,11 +204,12 @@ class CashierContainer extends Component{
             </div>
             <OrderComponent
                 order_items= {selected_order.order_items}/>
-           <InvoiceComponent
+           <InvoiceContainer
                     selected_order={selected_order}
-                    printed={printed}
                     setPrinted={setPrinted}
-                    handleCheckOut={handleCheckOut}/>
+                    handleCheckOut={handleCheckOut}
+                    onChangeCash={onChangeCash}
+                    order_summaries={order_summaries}/>
         </div>
        )
    }

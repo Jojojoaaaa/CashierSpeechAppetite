@@ -17,7 +17,7 @@
 .account {
     display: flex;
     flex-direction: row;
-    height: 20%;
+    height: 50px;
     align-items: center;
     justify-content: flex-start;
     margin: 0 55px 10px 55px;
@@ -26,6 +26,23 @@
     box-shadow:0 5px 20px 0 rgba(0, 0, 0, 0.1); 
     color: #735C4B;
     font-weight: bold; 
+}
+
+.account-lines-header{
+        display: flex;
+        flex-direction: row;
+        background-color: white;
+        color: rgb(179, 179, 179);
+        font-weight: bold; 
+        padding: 2% 10% 2% 10%;
+}
+
+.account-short{
+    flex: 1;
+}
+
+.account-button{
+    border: 0;
 }
 .flex-short-account{
     flex: .7;
