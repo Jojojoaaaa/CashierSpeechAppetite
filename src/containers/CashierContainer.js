@@ -23,6 +23,7 @@ class CashierContainer extends Component{
             show_modal: false,
             show_prompt: false,
             confirm_method: '',
+            date : moment().format('LL'),
         }
     }
     componentWillMount() {
@@ -40,7 +41,8 @@ class CashierContainer extends Component{
         })
     }
     retrieveAllOrders = () => {
-       const post_data = {status: type.SERVED};
+       const {date} = this.state; 
+       const post_data = {status: type.SERVED, date: date};
 
        axios.post(url.RETRIEVE_ORDERS, post_data)
         .then(response => {
@@ -140,7 +142,6 @@ class CashierContainer extends Component{
            show_prompt, 
            confirm_method,
             } = this.state;
-        
        const handleOrderClick = this.handleOrderClick;
        const setPrinted = this.setPrinted;
        const handleCheckOut = this.handleCheckOut;
@@ -164,19 +165,28 @@ class CashierContainer extends Component{
                     <PrompModalComponent
                         handleConfirm={confirm_method}
                         handleDecline={handleCancel}
-                        modal_message={modal_message}/>
+                        modal_message={modal_message}
+                    />
                 :
                 null
        )
+       const orders_component = (
+           orders 
+                ?
+                    <OrdersComponent
+                    selected_order={selected_order}
+                    orders={orders}
+                    handleOrderClick={handleOrderClick}
+                    />
+                :
+                    null
+        )
        return (
         <div className='cashier-container'>
             {modal}
             {prompt}
             <div className='orders'>
-                <OrdersComponent
-                    selected_order={selected_order}
-                    orders={orders}
-                    handleOrderClick={handleOrderClick}/>
+            {orders_component}
             </div>
             <OrderComponent
                 order_items= {selected_order.order_items}/>

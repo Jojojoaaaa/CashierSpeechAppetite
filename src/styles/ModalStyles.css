@@ -32,6 +32,16 @@
     width: 30%;
     border-radius: 5px;
 }
+.modal-add-account {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: auto;
+    height: 70%;
+    padding: 10px;
+    width: 30%;
+    border-radius: 5px;
+}
 
 .modal-logo{
 flex: 1;

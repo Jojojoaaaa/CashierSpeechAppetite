@@ -1,18 +1,6 @@
 import React from 'react';
 
-export function OrderLinesHeaderComponent(props) {
-    return (
-       <div className='order-lines-header'>
-           <div className='flex-short'>Date</div>
-           <div className='flex-long'>Item Description</div>
-           <div className='flex-short'>Qty</div>
-           <div className='flex-short'>Price</div>
-           <div className='flex-short'>Total</div>
-       </div>
-    );
-}
-
-export function OrderLinesComponent(props) {
+export default function OrderLinesComponent(props) {
     const {
         date,
         item_description,
