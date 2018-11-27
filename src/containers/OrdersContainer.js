@@ -2,7 +2,8 @@ import React, {Component}from 'react';
 import ReactToPrint from 'react-to-print';
 
 import OrdersHeaderComponent from '../components/OrdersHeaderComponent';
-import {OrderLinesComponent, OrderLinesHeaderComponent} from '../components/OrderLinesComponent';
+import OrderLinesComponent from '../components/OrderLinesComponent';
+import OrderLinesHeaderComponent from '../components/ListHeaderComponent';
 import ModalComponent from '../components/ModalComponent';
 import OrdersFilterComponent from '../components/OrdersFilterComponent';
 
@@ -18,7 +19,6 @@ class OrdersContainer extends Component{
         super(props);
             this.state = {
                 date : moment().format('LL'),
-                week: [],
                 show_modal: false,
                 modal_type: '',
                 modal_message: '',
@@ -39,12 +39,9 @@ class OrdersContainer extends Component{
     }
     handleSort =(sort)=> {
         let order_lines = [...this.state.order_lines];
-        const {filter} = this.state;
         switch(sort) {
             case type.DATE_SORT:
-                if (filter !== type.WEEK_FILTER) {
-                    order_lines.sort(this.sortDate);
-                }
+                order_lines.sort(this.sortDate);
                 break;
             case type.NAME_SORT:
                 order_lines.sort(this.sortName);
@@ -64,7 +61,6 @@ class OrdersContainer extends Component{
                 this.setState({date: date});
                 this.retrieveFilteredOrders(date);
                 break;
-            case type.WEEK_FILTER:
             case type.MONTH_FILTER:
                 const month = moment().format('MMMM');
                 this.setState({date: month});
@@ -74,6 +70,7 @@ class OrdersContainer extends Component{
                 const year = moment().format('YYYY');
                 this.setState({date: year});
                 this.retrieveFilteredOrders(year);
+                break;
             default:
         } 
         this.setState({filter: filter});
@@ -97,12 +94,6 @@ class OrdersContainer extends Component{
 		b = moment(b.date);
 		return b.diff(a);
     }
-    // sortMonth = (a,b) => {
-    //     a = moment(a.date);
-    //     b= moment(b.date);
-    //     console.log(a.diff(b, 'months'));
-    //     return a.diff(b, 'months');  
-    // }
     retrieveAllOrders =() => {
         const {date} = this.state;
         const post_data = {
@@ -220,7 +211,13 @@ class OrdersContainer extends Component{
                     />
                 </div>
                 <div  ref ={(el) =>this.ref = el}>
-                    <OrderLinesHeaderComponent/>
+                    <OrderLinesHeaderComponent
+                        column1='Date'
+                        column2='Item Description'
+                        column3='Qty'
+                        column4='Price'
+                        column5='Total'
+                        wild_class='flex-long'/>
                     <div className='order-lines'>
                         {order_lines_group}
                     </div>

@@ -13,6 +13,5 @@ export const NAME_SORT = 'name';
 export const DATE_SORT = 'date';
 export const QTY_SORT = 'qty';
 export const TODAY_FILTER =  'today';
-export const WEEK_FILTER = 'week';
 export const MONTH_FILTER = 'month';
 export const YEAR_FILTER = 'year';

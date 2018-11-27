@@ -7,7 +7,7 @@ export default function OrdersComponent(props) {
         selected_order,
         orders,
         handleOrderClick} = props;
-    return (    
+    return ( 
         orders.map(order => {
             const order_class = (selected_order.id === order.id) ? 'selected-order-card' : 'order-card';
             return ( <div 
@@ -28,5 +28,6 @@ export default function OrdersComponent(props) {
                     </div>
                 </div>)
         })
+    
     );
 }
