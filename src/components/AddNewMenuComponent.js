@@ -6,9 +6,11 @@ export default function AddNewMenuComponent(props) {
         categories,
         handleCancelAdd,
         handleImageClick,
+        handleSave,
         handleCategoryClick,
         handleCategorySelect,
         handleInputChange,
+        handlePictureChange,
         image_source,
         image_edit_mode,
         category_edit_mode,
@@ -52,7 +54,7 @@ export default function AddNewMenuComponent(props) {
                         buttonText='Choose Image'
                         singleImage={true}
                         withPreview={false}
-                        // onChange={(pictures) => handlePictureChange(pictures[pictures.length-1])}
+                        onChange={(pictures) => handlePictureChange(pictures[pictures.length-1])}
                         imgExtension={['.jpg', '.png']}
                         maxFileSize={5242880}
                     />
@@ -92,6 +94,7 @@ export default function AddNewMenuComponent(props) {
                             />
                     </div>
                 </div>
+                {props.children}
                 <div className='menu-servings'>
                 <div id='input-servings'>
                 <input 
@@ -130,7 +133,7 @@ export default function AddNewMenuComponent(props) {
                             <button
                                 className='button-menu'
                                 id='button-fill'
-                                // onClick={() => handleSaveClick()}
+                                onClick={() => handleSave()}
                                 >Save</button>
                         </div>
                     </div>

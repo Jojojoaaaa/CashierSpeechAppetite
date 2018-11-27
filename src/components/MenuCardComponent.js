@@ -24,6 +24,7 @@ export default function MenuCardComponent(props) {
         handlePictureChange,
         handleImageClick,
         handleSaveClick,
+        handleDeleteClick
     } = props;
     const categories_dropdown = 
         categories 
@@ -54,7 +55,8 @@ export default function MenuCardComponent(props) {
                             className='button-edit'
                             onClick={()=>handleEditMode()}></img>
                             <img src={del} 
-                            className='button-edit'></img>
+                            className='button-edit'
+                            onClick={() => handleDeleteClick()}></img>
                         </div>
                     }
             </div>

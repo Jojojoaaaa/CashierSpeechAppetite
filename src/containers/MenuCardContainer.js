@@ -1,6 +1,7 @@
 import React, {Component}from 'react';
 import MenuCardComponent from '../components/MenuCardComponent';
 import ModalComponent from '../components/ModalComponent';
+import PromptModalComponent from '../components/PromptModalComponent';
 
 import axios from '../axios';
 import * as url from '../constants/urls';
@@ -23,7 +24,8 @@ class MenuCardContainer extends Component{
         image_blob: '',
         show_modal: false,
         modal_type: '',
-        modal_message: ''
+        modal_message: '',
+        show_prompt: false,
     }
     this.id = this.props.id;
    }
@@ -52,6 +54,49 @@ class MenuCardContainer extends Component{
                 modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE
             })
         });
+    }
+    handleDeleteClick = () => {
+        this.setState({
+            show_prompt: true,
+            modal_message: 'Are you sure you want to delete menu?'
+        });
+    }
+    handleCancelDelete = () => {
+        this.setState({show_prompt: false});
+    }
+    handleConfirmDelete = () => {
+        this.setState({
+            show_prompt: false
+        })
+        const id  =this.id;
+        const post_data = {id:id};
+
+        axios.post(url.DELETE_MENU, post_data)
+            .then(response => {
+                if (response.data === type.SUCCESS) {
+                    this.setState({
+                        show_modal: true,
+                        modal_message: 'Menu has been deleted',
+                        modal_type: type.SUCCESS
+                    })
+                    
+                }
+                else {
+                    this.setState({
+                        show_modal: true,
+                        modal_message: 'Something went wrong...',
+                        modal_type: type.ERROR
+                    })
+                }
+                this.props.refresh();
+            })
+            .catch(error => {
+                this.setState({
+                    show_modal: true,
+                    modal_message: type.PRE_ERROR_MESSAGE + error.message + type.POST_ERROR_MESSAGE,
+                    modal_type: type.ERROR
+                })
+            })
     }
     handleEditMode = () => {
        this.setState({
@@ -127,14 +172,14 @@ class MenuCardContainer extends Component{
             servings: servings,
             category_name: category_name
         };
-        const header = {headers: {'Content-Type': 'multipart/form-data',}};
+        const header = {headers: {'Content-Type': 'multipart/form-data'}};
         axios.post(url.UPDATE_MENU_PROFILE, post_data)
             .then(response => {
-                //console.log(response.data)
+                console.log(response.data)
                 if (response.data === type.SUCCESS) {
                     this.setState({
                         show_modal: true,
-                        modal_message: 'Order has been updated',
+                        modal_message: 'Menu has been updated',
                         modal_type: type.SUCCESS
                     })
                 }
@@ -145,7 +190,6 @@ class MenuCardContainer extends Component{
                         modal_type: type.ERROR
                     })
                 }
-                //alert(response.data);
             })
             .catch(error => {
                 this.setState({
@@ -218,7 +262,8 @@ class MenuCardContainer extends Component{
                 image_edit_mode,
                 show_modal,
                 modal_message,
-                modal_type
+                modal_type,
+                show_prompt
             } = this.state;
         const categories = this.props.categories;
         const handleEditMode = this.handleEditMode;   
@@ -230,6 +275,9 @@ class MenuCardContainer extends Component{
         const handleImageClick = this.handleImageClick;
         const handleSaveClick = this.handleSaveClick;
         const handleHideModal = this.handleHideModal;
+        const handleDeleteClick = this.handleDeleteClick;
+        const handleCancelDelete = this.handleCancelDelete;
+        const handleConfirmDelete = this.handleConfirmDelete;
 
         const menu_card_class = (edit_mode) ? 'menu-edit-mode' : '';
         const modal = (
@@ -242,6 +290,16 @@ class MenuCardContainer extends Component{
                 :
                 null
         );
+        const prompt = (
+            show_prompt
+                ?
+                <PromptModalComponent   
+                    modal_message={modal_message}
+                    handleConfirm={handleConfirmDelete}
+                    handleDecline={handleCancelDelete}/>
+                :
+                null
+        )
         return (
             <MenuCardComponent
                 edit_mode={edit_mode}
@@ -262,8 +320,10 @@ class MenuCardContainer extends Component{
                 handleCancelClick={handleCancelClick}
                 handlePictureChange={handlePictureChange}
                 handleImageClick={handleImageClick}
-                handleSaveClick={handleSaveClick}>
+                handleSaveClick={handleSaveClick}
+                handleDeleteClick={handleDeleteClick}>
                 {modal}
+                {prompt}
                 </MenuCardComponent>
         )
     }

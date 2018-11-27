@@ -10,7 +10,8 @@ import * as route from '../constants/routes';
 export default function NavbarComponent(props) {
     const {
         cashier_class,
-        admin_class
+        admin_class,
+        handleSettingsClick
     } = props;
     
     return (
@@ -32,8 +33,9 @@ export default function NavbarComponent(props) {
                 </div>
             </div> 
             <div>
-                <img  className='nav-settings' src={settings}></img>
+                <img onClick={()=>handleSettingsClick()}  className='nav-settings' src={settings}></img>
             </div>
+            {props.children}
         </div>
     );
 }

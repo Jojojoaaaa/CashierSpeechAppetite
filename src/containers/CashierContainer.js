@@ -7,7 +7,7 @@ import * as type from '../constants/type';
 
 import OrdersComponent from '../components/OrdersComponent';
 import OrderComponent from '../components/OrderComponent';
-import InvoiceContainer from '../containers/InvoiceContainer';
+import InvoiceContainer from '../components/InvoiceComponent';
 import ModalComponent from '../components/ModalComponent';
 import PrompModalComponent from '../components/PromptModalComponent';
 
@@ -29,7 +29,7 @@ class CashierContainer extends Component{
     }
     componentWillMount() {
         if (this.props.auth) {
-            this.retrieveAllOrders();          
+            //this.retrieveAllOrders();          
         }
     }
     componentWillUnmount() {
@@ -153,7 +153,7 @@ class CashierContainer extends Component{
            show_modal,
            show_prompt, 
            confirm_method,
-           order_summaries
+           order_summaries,
             } = this.state;
        const handleOrderClick = this.handleOrderClick;
        const setPrinted = this.setPrinted;
@@ -161,6 +161,7 @@ class CashierContainer extends Component{
        const handleHideModal = this.handleHideModal;
        const handleCancel =this.handleCancel;
        const onChangeCash = this.onChangeCash;
+       const checkout =this.checkout;
             
        const modal = (
             show_modal 
@@ -207,7 +208,7 @@ class CashierContainer extends Component{
            <InvoiceContainer
                     selected_order={selected_order}
                     setPrinted={setPrinted}
-                    handleCheckOut={handleCheckOut}
+                    checkout={checkout}
                     onChangeCash={onChangeCash}
                     order_summaries={order_summaries}/>
         </div>

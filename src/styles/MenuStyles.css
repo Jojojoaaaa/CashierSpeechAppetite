@@ -544,7 +544,7 @@
 }
 
 /* When the checkbox is checked, add background */
-h.container input:checked ~ .checkmark {
+.container input:checked ~ .checkmark {
     background-color: #EDC589;
 }
 

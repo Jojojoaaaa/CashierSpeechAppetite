@@ -14,7 +14,10 @@ export const RETRIEVE_CATEGORY_IMAGE = 'retrieveCategoryImage.php';
 export const UPDATE_ORDERS_STATUS = 'updateOrdersStatus.php';
 export const UPDATE_MENU_PROFILE = 'updateMenuProfile.php';
 export const UPDATE_ACCOUNT = 'updateAccount.php';
+export const UPDATE_PASSWORD = 'updatePassword.php';
 
 export const INSERT_ACCOUNT = 'insertAccount.php';
+export const INSERT_MENU = 'insertMenu.php';
 
 export const DELETE_ACCOUNT = 'deleteAccount.php';
+export const DELETE_MENU = 'deleteMenu.php';

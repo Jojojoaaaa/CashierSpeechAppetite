@@ -194,6 +194,7 @@ class MenuContainer extends Component{
         const handleAddMenuClick = this.handleAddMenuClick;
         const handleCancelAdd = this.handleCancelAdd;
         const handleCloseModal = this.handleCloseModal;
+        const retrieveAllMenu = this.retrieveAllMenu;
 
         const filter_class = (filter_visible) ? '' : 'hide';
         const menu_cards = (
@@ -203,7 +204,8 @@ class MenuContainer extends Component{
                     <MenuCardContainer 
                     key={m.id} 
                     id={m.id}
-                    categories={categories}/>
+                    categories={categories}
+                    refresh={retrieveAllMenu}/>
                     )
                 )
                 : 
@@ -237,7 +239,8 @@ class MenuContainer extends Component{
                         ? 
                         (<AddNewMenuContainer
                             categories={categories}
-                            handleCancelAdd={handleCancelAdd}/>)
+                            handleCancelAdd={handleCancelAdd}
+                            retrieveAllMenu={retrieveAllMenu}/>)
                         :
                         null
                     }
