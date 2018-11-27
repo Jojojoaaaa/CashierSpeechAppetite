@@ -1,40 +1,15 @@
-import React, {Component}from 'react';
+import React from 'react';
 import ReactToPrint from 'react-to-print';
-import ReceiptComponent from '../components/ReceiptComponent';
+import ReceiptComponent from './ReceiptComponent';
 
-class InvoiceContainer extends Component {
-    constructor(props) {
-        super(props);
-        // this.state = {
-        //     cash: 0,
-        //     change: 0,
-        //     valid: false
-        // }
-       
-    }
-    // onChangeCash =(selected_order) => {
-    //     const total = this.props.selected_order.total;
-    //     const valid = (total<=cash);
-
-    //     const change = (total < cash) ? (cash-total) : 0;
-    //     this.setState({
-    //         cash:cash,
-    //         change: change,
-    //         valid:valid
-    //     })
-    // }
-       
-    render() {
-        // const {
-        //     cash, change, valid
-        // } = this.state;
+export default function InvoiceContainer(props) {
         const {
             selected_order,
             setPrinted,
-            handleCheckOut,
+            checkout,
             onChangeCash,
             order_summaries
-        } = this.props;
+        } = props;
         const id = selected_order.id;
         const valid = order_summaries[id] ? order_summaries[id].valid : false;
         const cash = order_summaries[id] ? order_summaries[id].cash : false;
@@ -86,14 +61,14 @@ class InvoiceContainer extends Component {
                             type='number' 
                             value= {cash} 
                             onChange={(e) => onChangeCash(selected_order, e.target.value)} 
-                            // hidden={!selected_order.printed}
+                            hidden={!selected_order.printed}
                             />
                     </div>
                     <div className="payment-flex">
                         <div id="text-title"> Change </div>
                         <div 
                             id="text-amount"
-                            // hidden={!selected_order.printed}
+                            hidden={!selected_order.printed}
                             >
                             Php {(valid) ? cash - selected_order.total : 0}
                         </div>
@@ -101,21 +76,19 @@ class InvoiceContainer extends Component {
                     
                     <div className="invoice-buttons">
                         <ReactToPrint
-                            trigger={() =>  <button className="button-invoice">Print</button>}
+                            trigger={() =>  <button className="button-invoice">Bill</button>}
                             content={() => ref}
                             onAfterPrint={() => setPrinted(selected_order.id)}
                         />
-                        <button 
-                            className="button-invoice"
-                            disabled={!(valid &&selected_order.printed)}
-                            onClick={()=>handleCheckOut()}>Check Out</button>
-                       
+                        <ReactToPrint
+                            trigger={() =>  <button className="button-invoice"disabled={!(valid &&selected_order.printed)}>Check Out</button>}
+                            content={() => ref}
+                            onAfterPrint={() => checkout()}
+                        />
                     </div>
                     
                 </div>)
             :
             null
         );
-    }
 }
-export default InvoiceContainer;

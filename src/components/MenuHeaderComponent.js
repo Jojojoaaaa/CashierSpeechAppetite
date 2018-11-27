@@ -30,7 +30,7 @@ export default function MenuHeaderComponent(props) {
                 :
                 null
             }
-            <button id='btn-cat'><img src={category}></img><div>CATEGORY</div></button>
+            {/* <button id='btn-cat'><img src={category}></img><div>CATEGORY</div></button> */}
             {!filter_visible
                 ?
                 (<button className='btn-filter' onClick={() => handleFilterClick()}><img src={filter}></img>FILTERS</button>)
