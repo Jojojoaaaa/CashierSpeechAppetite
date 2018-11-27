@@ -4,6 +4,8 @@ import axios from '../axios';
 import * as url from '../constants/urls';
 import * as type from '../constants/type';
 
+import btndelete from '../assets/admin/icon-delete.svg'
+import edit from '../assets/admin/icon-edit.svg'
 import ModalComponent from '../components/ModalComponent';
 import PromptModalComponent from '../components/PromptModalComponent';
 
@@ -201,7 +203,7 @@ class AccountLineContainer extends Component{
             {modal}
             {prompt}
             <button
-                onClick={()=> handleDelete()}>Delete</button>
+                onClick={()=> handleDelete()} className='account-button'><img src={btndelete}></img></button>
             <div className='flex-short-account'>{waiter_id}</div>
             <input 
                 className='flex-short-account'
@@ -235,11 +237,11 @@ class AccountLineContainer extends Component{
             {edit_mode
                 ?
                 <div>
-                    <button onClick={() => handleSave()}>Save</button>
-                    <button onClick={() => handleCancel()}>Cancel</button>
+                    <button onClick={() => handleSave()} className='account-button'>Save</button>
+                    <button onClick={() => handleCancel()} className='account-button'>Cancel</button>
                 </div>
                 :
-                <button onClick={() => handleEdit()}>EDIT</button>
+                <button onClick={() => handleEdit()} className='account-button'><img src={edit}></img></button>
             }
             </div>
         )

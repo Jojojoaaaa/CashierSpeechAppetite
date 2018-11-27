@@ -35,12 +35,25 @@
 .modal-add-account {
     display: flex;
     flex-direction: column;
-    background-color: #fefefe;
+    background-image: linear-gradient(to bottom right,  rgb(221, 128, 99), rgb(247, 198, 126));
+    align-items: center;
+    justify-content: center;
     margin: auto;
-    height: 70%;
+    height: 40%;
     padding: 10px;
     width: 30%;
     border-radius: 5px;
+}
+
+#modal-add-input{
+    width: 60%;
+    padding: 5px;
+    border-radius: 25px;
+    border: 0;
+    height: 6%;
+    margin: 5px;
+    background-color:rgb(255, 255, 255, 0.3);
+    border-color: #DA8C75;
 }
 
 .modal-logo{
@@ -110,4 +123,17 @@ flex: 1;
     height: 20px;
     border: 0;
     background-color:rgb(236, 233, 233);
+}
+
+.admin-buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.text-prompt{
+    font-size: 10px;
+}
+
+#modal-add-input::placeholder{
+    color: rgb(88, 88, 88);
 }

@@ -86,14 +86,14 @@ class InvoiceContainer extends Component {
                             type='number' 
                             value= {cash} 
                             onChange={(e) => onChangeCash(selected_order, e.target.value)} 
-                            // hidden={!selected_order.printed}
+                            hidden={!selected_order.printed}
                             />
                     </div>
                     <div className="payment-flex">
                         <div id="text-title"> Change </div>
                         <div 
                             id="text-amount"
-                            // hidden={!selected_order.printed}
+                            hidden={!selected_order.printed}
                             >
                             Php {(valid) ? cash - selected_order.total : 0}
                         </div>

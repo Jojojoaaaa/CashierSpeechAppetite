@@ -124,7 +124,7 @@ class AccountsContainer extends Component{
                         column3='Last Name'
                         column4='Contact No.'
                         column5='Password'
-                        wild_class='flex-short'
+                        wild_class='account-short'
                     />
                     
                     <div className='accounts'>

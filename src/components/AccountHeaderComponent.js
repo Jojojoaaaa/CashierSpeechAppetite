@@ -1,5 +1,6 @@
 import React from 'react';
 
+import add from '../assets/menu/icon-add.svg';
 export default function AccountHeaderComponent(props) {
     const {
         handleSearchQueryChange,
@@ -19,7 +20,7 @@ export default function AccountHeaderComponent(props) {
         </div>
         <div className="header-button">
         <button
-            onClick={()=> handleAddNewAccount()}>Add New</button>
+            onClick={()=> handleAddNewAccount()} id='btn-add'><div>Add New</div><img src={add}></img></button>
         </div>
     </div>
     );
