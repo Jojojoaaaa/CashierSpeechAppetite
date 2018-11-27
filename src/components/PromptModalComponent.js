@@ -20,7 +20,8 @@ export default function PromptModalComponent(props) {
                 </div>
                 <div className='modal-box-content'>
                     <div className='modal-message'>{modal_message}
-                    {props.children}</div>
+                    {props.children}
+                </div>
                     <div className='modal-buttons'>
                         <button 
                             className="button-stroke"
